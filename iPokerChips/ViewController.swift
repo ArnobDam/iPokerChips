@@ -37,8 +37,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         
 //        When continue is pressed, we create a view that sets the number of players
-        let playerNamesview = playersNames()
+        //let playerNamesview = playersNames()
+
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let playerNamesview =  storyboard.instantiateViewController(withIdentifier: "playerNamesViewController") as! playersNames
+        
         playerNamesview.numberOfPlayers = Int (pickerData[playerDropdown.selectedRow(inComponent: 0)])
+        
+        
         print("the number of players is", playerNamesview.numberOfPlayers!)
         self.navigationController?.pushViewController(playerNamesview, animated: true)
     }

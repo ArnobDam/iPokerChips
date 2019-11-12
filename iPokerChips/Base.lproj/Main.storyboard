@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iPokerChips" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playersVC" id="BYZ-38-t0r" customClass="ViewController" customModule="iPokerChips" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
         <!--Players Names-->
         <scene sceneID="CKd-MJ-v9M">
             <objects>
-                <viewController id="UGX-X0-Pkt" customClass="playersNames" customModule="iPokerChips" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerNamesViewController" id="UGX-X0-Pkt" customClass="playersNames" customModule="iPokerChips" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ofa-Df-2cm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
