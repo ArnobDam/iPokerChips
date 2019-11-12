@@ -9,6 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    func weOutHere() {
+//        disregard this
+//        allright more testing
+//        Mannyt out gere to
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
