@@ -34,18 +34,31 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func playPressed(_ sender: Any) {
+        
+        
+//        When continue is pressed, we create a view that sets the number of players
+        let playerNamesview = playersNames()
+        playerNamesview.numberOfPlayers = Int (pickerData[playerDropdown.selectedRow(inComponent: 0)])
+        print("the number of players is", playerNamesview.numberOfPlayers!)
+        self.navigationController?.pushViewController(playerNamesview, animated: true)
     }
+    
     @IBOutlet weak var playerDropdown: UIPickerView!
     @IBOutlet weak var selectPlayers: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        //        hide the navigation bar on menu screen
+        self.navigationController?.navigationBar.isHidden = true
+    }
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        
+
         
 //setting the Play button's corners round
         playButton.layer.cornerRadius = 10
