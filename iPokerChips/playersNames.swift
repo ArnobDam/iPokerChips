@@ -33,6 +33,13 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+           // self.names.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         let index = playerTableView.indexPath(for: textField.superview?.superview as! UITableViewCell)
