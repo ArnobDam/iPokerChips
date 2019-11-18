@@ -33,7 +33,15 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if numberOfPlayers! < 3 {
+            return false
+        }
+        return true
+    }
+    
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if (numberOfPlayers! > 2) {
             if editingStyle == .delete {
                 self.names.remove(at: indexPath.row)
