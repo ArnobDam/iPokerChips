@@ -12,11 +12,11 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
     var numberOfPlayers: Int?
     var names:[String] = []
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfPlayers!
     }
     
@@ -33,12 +33,24 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-           // self.names.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if numberOfPlayers! < 3 {
+            return false
         }
+        return true
+    }
+    
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if (numberOfPlayers! > 2) {
+            if editingStyle == .delete {
+                self.names.remove(at: indexPath.row)
+                numberOfPlayers = numberOfPlayers! - 1
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+            }
+        }
+
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
