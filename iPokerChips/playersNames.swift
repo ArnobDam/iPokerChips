@@ -44,11 +44,15 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
             if editingStyle == .delete {
                 //self.names.remove(at: indexPath.row)
                 numberOfPlayers = numberOfPlayers! - 1
-
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                for x in indexPath.row...numberOfPlayers! - 1 {
-                    let cell =  tableView.cellForRow(at: IndexPath(row: x, section: 0)) as! textFieldTableViewCell
-                    cell.textField.placeholder = String(format: "Player %d", Int(x+1))
+                
+                
+                if indexPath.row < numberOfPlayers! - 1 {
+                    for index in indexPath.row...numberOfPlayers! - 1 {
+                        print(index)
+                        let cell =  tableView.cellForRow(at: IndexPath(row: index, section: 0)) as! textFieldTableViewCell
+                        cell.textField.placeholder = String(format: "Player %d", Int(index+1))
+                    }
                 }
             }
         }
