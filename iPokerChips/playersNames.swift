@@ -77,6 +77,13 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         }
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let chipValueView =  storyboard.instantiateViewController(withIdentifier: "chipValueController") as! ChipValueView
+        
+        chipValueView.playerNames = names
+        
+        self.navigationController?.pushViewController(chipValueView, animated: true)
+        
         
         print(names)
     }
@@ -89,7 +96,10 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         playerTableView.delegate = self
         playerTableView.rowHeight = 74.0
         
-
+        playButton.layer.cornerRadius = 10
+        playButton.clipsToBounds = true
+        playButton.layer.borderColor = UIColor.black.cgColor
+        playButton.layer.borderWidth = 1
 
     /*
     // MARK: - Navigation
