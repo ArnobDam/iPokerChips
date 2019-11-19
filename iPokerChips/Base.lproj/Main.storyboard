@@ -218,6 +218,12 @@
                                 <rect key="frame" x="32" y="105" width="264" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set starting hand size" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aag-mc-KOD">
+                                <rect key="frame" x="20" y="621" width="377" height="173"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75191285490000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Zoc-tg-jSb"/>
@@ -225,7 +231,7 @@
                     <navigationItem key="navigationItem" id="FHm-Y2-vrv"/>
                     <connections>
                         <outlet property="blackChipValueLabel" destination="xV2-aM-zxZ" id="ahM-vY-Q1a"/>
-                        <outlet property="blindText" destination="yli-Vh-f0z" id="htd-3W-oS7"/>
+                        <outlet property="blindText" destination="aag-mc-KOD" id="4Th-yi-FmM"/>
                         <outlet property="blueChipValueLabel" destination="KN2-h5-jGx" id="tKv-gT-ZLX"/>
                         <outlet property="greenChipValueLabel" destination="sit-jK-MEO" id="Tvs-sd-qnE"/>
                         <outlet property="playButton" destination="wnS-Wl-NO5" id="bHF-f6-hTf"/>

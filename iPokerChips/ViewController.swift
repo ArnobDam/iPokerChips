@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var pickerData = ["2", "3","4","5","6","7","8","9", "10"]
+    var pickerData = ["2", "3","4","5","6","7","8"]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
        return 1
