@@ -10,7 +10,6 @@ import UIKit
 
 class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var numberOfPlayers: Int?
-    var names:[String] = []
     
      func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -28,11 +27,10 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.textField.placeholder = String(format: "Player %d", Int(indexPath.row+1))
         cell.textField.font = UIFont(descriptor: .init(), size: 21)
         cell.textField.delegate = self
-        cell.textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+
 
         return cell
     }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if numberOfPlayers! < 3 {
             return false
@@ -44,33 +42,37 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         if (numberOfPlayers! > 2) {
             if editingStyle == .delete {
-                self.names.remove(at: indexPath.row)
+                //self.names.remove(at: indexPath.row)
                 numberOfPlayers = numberOfPlayers! - 1
+
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                
+                for x in indexPath.row...numberOfPlayers! - 1 {
+                    let cell =  tableView.cellForRow(at: IndexPath(row: x, section: 0)) as! textFieldTableViewCell
+                    cell.textField.placeholder = String(format: "Player %d", Int(x+1))
+                }
             }
         }
 
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        let index = playerTableView.indexPath(for: textField.superview?.superview as! UITableViewCell)
-        
-        names[(index?.row)!] = textField.text!
-    }
+    
+
     
  
     
     @IBOutlet weak var playButton: UIButton!
     @IBAction func playPressed(_ sender: Any) {
         
-        for (index, name) in names.enumerated() {
-            if name.trimmingCharacters(in: .whitespaces) == "" {
-                
-                names[index] = String(format: "Player %d", Int(index+1))
+
+        var names:[String] = []
+        for x in 0...numberOfPlayers!-1{
+            let cell =  playerTableView.cellForRow(at: IndexPath(row: x, section: 0)) as! textFieldTableViewCell
+            if cell.textField.text == "" {
+                names.append(cell.textField.placeholder!)
             }
-            
-            
+            else {
+                names.append(cell.textField.text!)
+            }
             
             
         }
@@ -87,13 +89,7 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         playerTableView.delegate = self
         playerTableView.rowHeight = 74.0
         
-        for i in 1...numberOfPlayers! {
-            names.append(String(format:"Player %d", i))
-        }
-        
-        // Do any additional setup after loading the view.
-    }
-    
+
 
     /*
     // MARK: - Navigation
@@ -104,5 +100,6 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Pass the selected object to the new view controller.
     }
     */
-
+        
+    }
 }
