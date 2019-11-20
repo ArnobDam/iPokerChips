@@ -78,7 +78,7 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Do any additional setup after loading the view.
         
         
-        blindText.text = String(format: "%@ will start as the big blind, and %@ will start as the the small blind!",playerNames[playerNames.count-1], playerNames[playerNames.count - 2])
+        blindText.text = String(format: "%@ will start as the big blind, and %@ will start as the small blind!",playerNames[playerNames.count-1], playerNames[playerNames.count - 2])
     }
     
     
