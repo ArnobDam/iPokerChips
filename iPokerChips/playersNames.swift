@@ -54,6 +54,10 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
                         cell.textField.placeholder = String(format: "Player %d", Int(index+1))
                     }
                 }
+                else {
+                    let cell =  tableView.cellForRow(at: IndexPath(row: numberOfPlayers!-1, section: 0)) as! textFieldTableViewCell
+                    cell.textField.placeholder = String(format: "Player %d", numberOfPlayers!)
+                }
             }
         }
 
