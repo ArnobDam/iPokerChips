@@ -10,15 +10,34 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    var handSize: Int?
+    var handSize: Double?
     var playerNames: [String] = []
+    var playerContentViews: [playerContentView] = []
     
-    
+    @IBOutlet weak var contentScroll: UIScrollView!
+
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.isHidden = true
+        
+        contentScroll.contentSize = CGSize(width: contentScroll.frame.size.width*CGFloat(playerNames.count), height: contentScroll.frame.size.height)
+        contentScroll.contentSize.height = 1
+        
+        var currentWidth:CGFloat = 0
+        for name in playerNames {
+            /*var playerContent = playerContentView(frame: CGRect(x: 0, y: currentWidth, width: self.view.frame.width, height: self.view.frame.height), playerName: name)
+            playerContentViews.append(playerContent)
+            contentScroll.addSubview(playerContent)
+            currentWidth += self.view.frame.width*/
+        }
+        
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     

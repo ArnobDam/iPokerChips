@@ -12,6 +12,8 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     var playerNames:[String] = []
     var pickerData = ["$10", "$50","$100","$500","$1000"]
+    
+    var handSize:Double!
 
     @IBOutlet weak var blindText: UILabel!
 
@@ -43,6 +45,7 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     func updateChipValues (value:Double) {
         
+        handSize = value
         let blueValue = 0.005*value
         let redValue = 0.01*value
         let greenValue = 0.05*value
@@ -69,6 +72,7 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         valuePicker.delegate = self
         valuePicker.dataSource = self
         updateChipValues(value: 10)
+    
 
         
         playButton.layer.cornerRadius = 10
@@ -85,6 +89,14 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var playButton: UIButton!
     @IBAction func playPressed(_ sender: Any) {
         
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let gameViewController =  storyboard.instantiateViewController(withIdentifier: "gameViewController") as! GameViewController
+        
+        gameViewController.playerNames = playerNames
+        gameViewController.handSize = handSize
+        
+        self.navigationController?.pushViewController(gameViewController, animated: true)
             
     }
     
