@@ -13,13 +13,32 @@ class GameViewController: UIViewController {
     var handSize: Double?
     var playerNames: [String] = []
     var playerContentViews: [playerContentView] = []
+    var currentPlayer = 0
+    
+    
+    @IBAction func popOutMenu(_ sender: Any) {
+            goToNextPlayer()
+    }
     
     @IBOutlet weak var contentScroll: UIScrollView!
 
-    
+    func goToNextPlayer() {
+        currentPlayer += 1
+        if currentPlayer == playerNames.count {
+            currentPlayer = 0
+        }
+        let frame = playerContentViews[currentPlayer].frame
+        contentScroll.scrollRectToVisible(frame, animated: true)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "green background")?.draw(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
         self.navigationController?.navigationBar.isHidden = true
         
         contentScroll.contentSize = CGSize(width: contentScroll.frame.size.width*CGFloat(playerNames.count), height: contentScroll.frame.size.height)
@@ -27,14 +46,13 @@ class GameViewController: UIViewController {
         
         var currentWidth:CGFloat = 0
         for name in playerNames {
-            /*var playerContent = playerContentView(frame: CGRect(x: 0, y: currentWidth, width: self.view.frame.width, height: self.view.frame.height), playerName: name)
+            var playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name)
             playerContentViews.append(playerContent)
             contentScroll.addSubview(playerContent)
-            currentWidth += self.view.frame.width*/
+            currentWidth += self.view.frame.width
         }
         
-        
-        
+
         
         
         

@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
+        
         return pickerData.count
     
     }
@@ -31,6 +32,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     
 
+    
     @IBOutlet weak var addButton: UIButton!
     
     @IBAction func addPlayer(_ sender: Any) {
@@ -77,10 +79,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         UIGraphicsEndImageContext()
         self.view.backgroundColor = UIColor(patternImage: image)
         
+        
 //setting the Play button's corners round
         playButton.layer.cornerRadius = 10
         playButton.clipsToBounds = true
-        playButton.layer.borderColor = UIColor.black.cgColor
+        playButton.layer.borderColor = UIColor.white.cgColor
         playButton.layer.borderWidth = 1
     
         

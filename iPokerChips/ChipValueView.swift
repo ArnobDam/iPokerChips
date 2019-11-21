@@ -54,9 +54,33 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
+        if blueValue < 0.3 {
+            blueChipValueLabel.text = "$0" + formatter.string(from: blueValue as NSNumber)!
+        }
+        else if blueValue > 0.3 && blueValue < 0.6 {
+            blueChipValueLabel.text = "$0" + formatter.string(from: blueValue as NSNumber)! + "0"
+        }
+        else if blueValue > 0.6 && blueValue < 5 {
+            blueChipValueLabel.text = "$" + formatter.string(from: blueValue as NSNumber)! + "0"
+        }
+        else {
         blueChipValueLabel.text = "$" + formatter.string(from: blueValue as NSNumber)!
-        redChipValueLabel.text = "$" + formatter.string(from: redValue as NSNumber)!
-        greenChipValueLabel.text = "$" + formatter.string(from: greenValue as NSNumber)!
+        }
+        if redValue < 1 {
+        redChipValueLabel.text = "$0" + formatter.string(from: redValue as NSNumber)! + "0"
+        }
+        else {
+            redChipValueLabel.text = "$" + formatter.string(from: redValue as NSNumber)!
+        }
+        if greenValue < 1 {
+        greenChipValueLabel.text = "$0" + formatter.string(from: greenValue as NSNumber)! + "0"
+        }
+        else if greenValue > 1 && greenValue < 3{
+            greenChipValueLabel.text = "$" + formatter.string(from: greenValue as NSNumber)! + "0"
+        }
+        else {
+             greenChipValueLabel.text = "$" + formatter.string(from: greenValue as NSNumber)!
+        }
         blackChipValueLabel.text = "$" + formatter.string(from: blackValue as NSNumber)!
 
 
@@ -73,11 +97,15 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         valuePicker.dataSource = self
         updateChipValues(value: 10)
     
-
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "green background")?.draw(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
         
         playButton.layer.cornerRadius = 10
         playButton.clipsToBounds = true
-        playButton.layer.borderColor = UIColor.black.cgColor
+        playButton.layer.borderColor = UIColor.white.cgColor
         playButton.layer.borderWidth = 1
         // Do any additional setup after loading the view.
         
