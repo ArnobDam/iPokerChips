@@ -73,7 +73,11 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         valuePicker.dataSource = self
         updateChipValues(value: 10)
     
-
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "green background")?.draw(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
         
         playButton.layer.cornerRadius = 10
         playButton.clipsToBounds = true

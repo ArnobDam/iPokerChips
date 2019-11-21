@@ -78,7 +78,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //setting the Play button's corners round
         playButton.layer.cornerRadius = 10
         playButton.clipsToBounds = true
-        playButton.layer.borderColor = UIColor.black.cgColor
+        playButton.layer.borderColor = UIColor.white.cgColor
         playButton.layer.borderWidth = 1
     
         
