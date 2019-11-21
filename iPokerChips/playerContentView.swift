@@ -125,6 +125,16 @@ class playerContentView: UIView {
         let blackChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip4)
         
+        let greenChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
+        self.addSubview(greenChip)
+        let greenChip2 = Chip(frame: CGRect(x: 320, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
+        self.addSubview(greenChip2)
+        let greenChip3 = Chip(frame: CGRect(x: 320, y: 720, width: chipWidth, height: chipHeight), chipType: .green)
+        self.addSubview(greenChip3)
+        let greenChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
+        self.addSubview(greenChip4)
+        
+        
         
         
         
