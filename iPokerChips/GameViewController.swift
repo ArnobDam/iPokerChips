@@ -18,6 +18,14 @@ class GameViewController: UIViewController {
     
     @IBAction func popOutMenu(_ sender: Any) {
             goToNextPlayer()
+        
+        var  playerNameValues = [String: String]()
+        for playerView
+            in playerContentViews {
+           // playerNameValues[playerView.player] = 
+        }
+        
+
     }
     
     @IBOutlet weak var contentScroll: UIScrollView!
@@ -48,7 +56,7 @@ class GameViewController: UIViewController {
         
         var currentWidth:CGFloat = 0
         for name in playerNames {
-            var playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name)
+            let playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name)
             playerContentViews.append(playerContent)
             contentScroll.addSubview(playerContent)
             currentWidth += self.view.frame.width
