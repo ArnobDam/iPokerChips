@@ -170,14 +170,6 @@
                                     <action selector="playPressed:" destination="f89-uw-0w6" eventType="touchUpInside" id="cBF-2J-cT3"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pokerChip" translatesAutoresizingMaskIntoConstraints="NO" id="b8Z-Aw-lNc">
-                                <rect key="frame" x="36" y="111" width="73" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="red_chip" translatesAutoresizingMaskIntoConstraints="NO" id="yFj-j1-i2y">
-                                <rect key="frame" x="226" y="111" width="73" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_chip" translatesAutoresizingMaskIntoConstraints="NO" id="gX7-cY-RKa">
                                 <rect key="frame" x="321" y="111" width="73" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -216,10 +208,6 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="green_chip" translatesAutoresizingMaskIntoConstraints="NO" id="Hbv-FB-X8a">
-                                <rect key="frame" x="32" y="105" width="264" height="91"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set starting hand size" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aag-mc-KOD">
                                 <rect key="frame" x="20" y="621" width="377" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -227,6 +215,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black_chip" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-lE-N7g">
+                                <rect key="frame" x="-48" y="111" width="240" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="green_chip" translatesAutoresizingMaskIntoConstraints="NO" id="eLM-4B-Ckd">
+                                <rect key="frame" x="44" y="111" width="240" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="red_chip" translatesAutoresizingMaskIntoConstraints="NO" id="J2e-c1-npE">
+                                <rect key="frame" x="142" y="111" width="240" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75191285490000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Zoc-tg-jSb"/>
@@ -272,10 +272,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="black_chip" width="600" height="565"/>
         <image name="blue_chip" width="600" height="589"/>
-        <image name="green_chip" width="600" height="375"/>
+        <image name="green_chip" width="600" height="556"/>
         <image name="logo_v2" width="1705" height="1417"/>
-        <image name="pokerChip" width="150" height="150"/>
-        <image name="red_chip" width="585" height="600"/>
+        <image name="red_chip" width="600" height="557"/>
     </resources>
 </document>
