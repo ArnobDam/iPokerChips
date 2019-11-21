@@ -114,7 +114,7 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         playButton.layer.cornerRadius = 10
         playButton.clipsToBounds = true
-        playButton.layer.borderColor = UIColor.black.cgColor
+        playButton.layer.borderColor = UIColor.white.cgColor
         playButton.layer.borderWidth = 1
         
     /*
