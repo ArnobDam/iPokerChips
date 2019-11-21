@@ -27,6 +27,7 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.textField.placeholder = String(format: "Player %d", Int(indexPath.row+1))
         cell.textField.font = UIFont(descriptor: .init(), size: 21)
         cell.textField.delegate = self
+        cell.backgroundColor = UIColor.clear
 
 
         return cell
@@ -99,6 +100,13 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var playerTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "background2")?.draw(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
+        
         self.navigationController?.navigationBar.isHidden = false
         playerTableView.dataSource = self
         playerTableView.delegate = self
@@ -108,7 +116,7 @@ class playersNames: UIViewController, UITableViewDelegate, UITableViewDataSource
         playButton.clipsToBounds = true
         playButton.layer.borderColor = UIColor.black.cgColor
         playButton.layer.borderWidth = 1
-
+        
     /*
     // MARK: - Navigation
 

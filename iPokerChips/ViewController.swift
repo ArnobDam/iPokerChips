@@ -17,10 +17,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
         return pickerData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return pickerData[row]
     }
     
@@ -65,7 +67,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         super.viewDidLoad()
         
-
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"green background")!)
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "green background")?.draw(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
         
 //setting the Play button's corners round
         playButton.layer.cornerRadius = 10
