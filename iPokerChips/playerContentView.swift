@@ -116,22 +116,22 @@ class playerContentView: UIView {
         self.addSubview(redChip4)
         
         
-        let blackChip = Chip(frame: CGRect(x: 220, y: 760, width: chipWidth, height: chipHeight), chipType: .black)
+        let blackChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip)
-        let blackChip2 = Chip(frame: CGRect(x: 220, y: 740, width: chipWidth, height: chipHeight), chipType: .black)
+        let blackChip2 = Chip(frame: CGRect(x: 320, y: 740, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip2)
-        let blackChip3 = Chip(frame: CGRect(x: 220, y: 720, width: chipWidth, height: chipHeight), chipType: .black)
+        let blackChip3 = Chip(frame: CGRect(x: 320, y: 720, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip3)
-        let blackChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
+        let blackChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip4)
         
-        let greenChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
+        let greenChip = Chip(frame: CGRect(x: 220, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip)
-        let greenChip2 = Chip(frame: CGRect(x: 320, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
+        let greenChip2 = Chip(frame: CGRect(x: 220, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip2)
-        let greenChip3 = Chip(frame: CGRect(x: 320, y: 720, width: chipWidth, height: chipHeight), chipType: .green)
+        let greenChip3 = Chip(frame: CGRect(x: 220, y: 720, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip3)
-        let greenChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
+        let greenChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip4)
         
         
