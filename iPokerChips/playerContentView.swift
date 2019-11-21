@@ -24,9 +24,9 @@ class playerContentView: UIView {
     
     
     func displayView(){
-        let callButton = UIButton(frame: CGRect(x: 100, y: 500, width: 100, height: 50))
+        let callButton = UIButton(frame: CGRect(x: 0, y: 500, width: 150, height: 50))
         
-        callButton.setTitle("Call", for: .normal)
+        callButton.setTitle("Call/Check", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
         callButton.layer.cornerRadius = 5
@@ -34,7 +34,7 @@ class playerContentView: UIView {
         callButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(callButton)
         
-        let foldButton = UIButton(frame: CGRect(x: 200, y: 500, width: 100, height: 50))
+        let foldButton = UIButton(frame: CGRect(x: 157, y: 500, width: 100, height: 50))
         
         foldButton.setTitle("Fold", for: .normal)
         foldButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -44,7 +44,7 @@ class playerContentView: UIView {
         foldButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(foldButton)
         
-        let raiseButton = UIButton(frame: CGRect(x: 300, y: 500, width: 100, height: 50))
+        let raiseButton = UIButton(frame: CGRect(x: 314, y: 500, width: 100, height: 50))
         
         raiseButton.setTitle("Raise", for: .normal)
         raiseButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -64,15 +64,15 @@ class playerContentView: UIView {
         cancel.layer.borderColor = UIColor.black.cgColor
         self.addSubview(cancel)
         
-        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 100, height: 50))
-        
-        bid.setTitle("bid", for: .normal)
-        bid.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
-        bid.addTarget(self, action: #selector(bidPressed), for: .touchUpInside)
-        bid.layer.cornerRadius = 5
-        bid.layer.borderWidth = 1
-        bid.layer.borderColor = UIColor.black.cgColor
-        self.addSubview(bid)
+//        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 100, height: 50))
+//
+//        bid.setTitle("bid", for: .normal)
+//        bid.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
+//        bid.addTarget(self, action: #selector(bidPressed), for: .touchUpInside)
+//        bid.layer.cornerRadius = 5
+//        bid.layer.borderWidth = 1
+//        bid.layer.borderColor = UIColor.black.cgColor
+//        self.addSubview(bid)
         
         
 //        creating labels
