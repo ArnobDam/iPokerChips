@@ -43,6 +43,8 @@ class GameViewController: UIViewController {
         
         contentScroll.contentSize = CGSize(width: contentScroll.frame.size.width*CGFloat(playerNames.count), height: contentScroll.frame.size.height)
         contentScroll.contentSize.height = 1
+        contentScroll.isUserInteractionEnabled = false
+
         
         var currentWidth:CGFloat = 0
         for name in playerNames {
