@@ -260,6 +260,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJn-Wp-Bjg">
+                                <rect key="frame" x="356" y="44" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="menu"/>
+                                <connections>
+                                    <action selector="popOutMenu:" destination="NTz-oO-N5p" eventType="touchUpInside" id="eGu-Hm-AtV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75191285490000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="JvD-Dq-kJI"/>
@@ -278,6 +286,7 @@
         <image name="blue_chip" width="600" height="589"/>
         <image name="green_chip" width="600" height="556"/>
         <image name="logo_v2" width="1705" height="1417"/>
+        <image name="menu" width="50" height="50"/>
         <image name="red_chip" width="600" height="557"/>
     </resources>
 </document>
