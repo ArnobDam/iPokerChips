@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
         var currentWidth:CGFloat = 0
         for name in playerNames {
             
-            var playerContent = playerContentView(frame: CGRect(x: 0, y: currentWidth, width: self.view.frame.width, height: self.view.frame.height), name: name)
+            var playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name)
             playerContentViews.append(playerContent)
             contentScroll.addSubview(playerContent)
             currentWidth += self.view.frame.width
