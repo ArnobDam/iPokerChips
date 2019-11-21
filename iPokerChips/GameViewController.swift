@@ -19,10 +19,9 @@ class GameViewController: UIViewController {
     @IBAction func popOutMenu(_ sender: Any) {
             goToNextPlayer()
         
-        var  playerNameValues = [String: String]()
-        for playerView
-            in playerContentViews {
-           // playerNameValues[playerView.player] = 
+        var  playerNameValues = [String: Double]()
+        for playerView in playerContentViews {
+            playerNameValues[playerView.player!] = playerView.currentValue
         }
         
 

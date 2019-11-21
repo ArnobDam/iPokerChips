@@ -13,7 +13,8 @@ class playerContentView: UIView {
     var blueChipArray: [Chip] = []
     var blackChipArray: [Chip] = []
     var greenChipArray: [Chip] = []
-    
+    var currentValue: Double = 0
+
     
     var player: String?
     
