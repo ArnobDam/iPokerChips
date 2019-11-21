@@ -244,6 +244,30 @@
             </objects>
             <point key="canvasLocation" x="3113.04347826087" y="97.767857142857139"/>
         </scene>
+        <!--Game View Controller-->
+        <scene sceneID="Vki-PL-EeI">
+            <objects>
+                <viewController storyboardIdentifier="gameViewController" id="NTz-oO-N5p" customClass="GameViewController" customModule="iPokerChips" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d7g-wy-0Ug">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bX-DG-SVb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.75191285490000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="JvD-Dq-kJI"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentScroll" destination="0bX-DG-SVb" id="S7P-Jv-fba"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IVP-wS-wee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3998.5507246376815" y="97.767857142857139"/>
+        </scene>
     </scenes>
     <resources>
         <image name="blue_chip" width="600" height="589"/>
