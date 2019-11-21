@@ -69,6 +69,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         super.viewDidLoad()
         
+        let jeremyGif = UIImage.gifImageWithName("poker-chip.gif")
+        let imageView = UIImageView(image: jeremyGif)
+        imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: 150.0)
+        view.addSubview(imageView)
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"green background")!)
         
         UIGraphicsBeginImageContext(self.view.frame.size)
