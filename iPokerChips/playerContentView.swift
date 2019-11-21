@@ -96,7 +96,7 @@ class playerContentView: UIView {
         playerTitle.textAlignment = .center
         self.addSubview(playerTitle)
         
-        let dragToRaise = UILabel(frame: CGRect(x: 120, y: 350, width: 200, height: 100))
+        let dragToRaise = UILabel(frame: CGRect(x: 130, y: 350, width: 200, height: 100))
         dragToRaise.text = "Drag chip to raise!"
         dragToRaise.font = UIFont(name: "Gurmukhi MN", size: 20)
         dragToRaise.textColor = UIColor.white
