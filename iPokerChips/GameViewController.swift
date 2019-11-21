@@ -39,8 +39,7 @@ class GameViewController: UIViewController {
             currentWidth += self.view.frame.width
         }
         
-        let testChip = Chip(frame: CGRect(x: 50, y: 50, width: 100, height: 100), chipType: .blue)
-        contentScroll.addSubview(testChip)
+        
         
         
         
