@@ -24,7 +24,7 @@ class playerContentView: UIView {
     
     
     func displayView(){
-        let callButton = UIButton(frame: CGRect(x: 100, y: 500, width: 50, height: 50))
+        let callButton = UIButton(frame: CGRect(x: 100, y: 500, width: 100, height: 50))
         
         callButton.setTitle("Call", for: .normal)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
@@ -33,7 +33,7 @@ class playerContentView: UIView {
         callButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(callButton)
         
-        let foldButton = UIButton(frame: CGRect(x: 200, y: 500, width: 50, height: 50))
+        let foldButton = UIButton(frame: CGRect(x: 200, y: 500, width: 100, height: 50))
         
         foldButton.setTitle("Fold", for: .normal)
         foldButton.addTarget(self, action: #selector(foldButtonPressed), for: .touchUpInside)
@@ -42,7 +42,7 @@ class playerContentView: UIView {
         foldButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(foldButton)
         
-        let raiseButton = UIButton(frame: CGRect(x: 300, y: 500, width: 50, height: 50))
+        let raiseButton = UIButton(frame: CGRect(x: 300, y: 500, width: 100, height: 50))
         
         raiseButton.setTitle("Raise", for: .normal)
         raiseButton.addTarget(self, action: #selector(raiseButtonPressed), for: .touchUpInside)
@@ -51,7 +51,7 @@ class playerContentView: UIView {
         raiseButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(raiseButton)
         
-        let cancel = UIButton(frame: CGRect(x: 10, y: 100, width: 50, height: 50))
+        let cancel = UIButton(frame: CGRect(x: 10, y: 100, width: 100, height: 50))
         
         cancel.setTitle("Cancel", for: .normal)
         cancel.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
@@ -60,7 +60,7 @@ class playerContentView: UIView {
         cancel.layer.borderColor = UIColor.black.cgColor
         self.addSubview(cancel)
         
-        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 50, height: 50))
+        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 100, height: 50))
         
         bid.setTitle("bid", for: .normal)
         bid.addTarget(self, action: #selector(bidPressed), for: .touchUpInside)
@@ -72,13 +72,17 @@ class playerContentView: UIView {
         
 //        creating labels
         
-        let playerTitle = UILabel(frame: CGRect(x: 100, y: 10, width: 200, height: 100))
+        let playerTitle = UILabel(frame: CGRect(x: self.center.x - 100, y: 10, width: 200, height: 100))
         playerTitle.text = player
+        playerTitle.font = UIFont(name: "guirmukhi", size: 20)
+        playerTitle.textColor = UIColor.white
         self.addSubview(playerTitle)
         
-        let dragToRaise = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
+        let dragToRaise = UILabel(frame: CGRect(x: 200, y: 100, width: 200, height: 100))
         dragToRaise.text = "Drag chip to raise!"
-        self.addSubview(playerTitle)
+        dragToRaise.font = UIFont(name: "guirmukhi", size: 20)
+        dragToRaise.textColor = UIColor.white
+        self.addSubview(dragToRaise)
     
         
     }
