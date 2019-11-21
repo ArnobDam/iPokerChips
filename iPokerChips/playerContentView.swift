@@ -24,34 +24,49 @@ class playerContentView: UIView {
     
     
     func displayView(){
-        let callButton = UIButton(frame: CGRect(x: 100, y: 100, width: 50, height: 50))
+        let callButton = UIButton(frame: CGRect(x: 100, y: 500, width: 50, height: 50))
         
         callButton.setTitle("Call", for: .normal)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
+        callButton.layer.cornerRadius = 5
+        callButton.layer.borderWidth = 1
+        callButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(callButton)
         
-        let foldButton = UIButton(frame: CGRect(x: 200, y: 100, width: 50, height: 50))
+        let foldButton = UIButton(frame: CGRect(x: 200, y: 500, width: 50, height: 50))
         
         foldButton.setTitle("Fold", for: .normal)
         foldButton.addTarget(self, action: #selector(foldButtonPressed), for: .touchUpInside)
+        foldButton.layer.cornerRadius = 5
+        foldButton.layer.borderWidth = 1
+        foldButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(foldButton)
         
-        let raiseButton = UIButton(frame: CGRect(x: 300, y: 100, width: 50, height: 50))
+        let raiseButton = UIButton(frame: CGRect(x: 300, y: 500, width: 50, height: 50))
         
         raiseButton.setTitle("Raise", for: .normal)
         raiseButton.addTarget(self, action: #selector(raiseButtonPressed), for: .touchUpInside)
+        raiseButton.layer.cornerRadius = 5
+        raiseButton.layer.borderWidth = 1
+        raiseButton.layer.borderColor = UIColor.black.cgColor
         self.addSubview(raiseButton)
         
         let cancel = UIButton(frame: CGRect(x: 10, y: 100, width: 50, height: 50))
         
         cancel.setTitle("Cancel", for: .normal)
         cancel.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
+        cancel.layer.cornerRadius = 5
+        cancel.layer.borderWidth = 1
+        cancel.layer.borderColor = UIColor.black.cgColor
         self.addSubview(cancel)
         
-        let bid = UIButton(frame: CGRect(x: 10, y: 100, width: 50, height: 50))
+        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 50, height: 50))
         
         bid.setTitle("bid", for: .normal)
         bid.addTarget(self, action: #selector(bidPressed), for: .touchUpInside)
+        bid.layer.cornerRadius = 5
+        bid.layer.borderWidth = 1
+        bid.layer.borderColor = UIColor.black.cgColor
         self.addSubview(bid)
         
         
@@ -73,23 +88,23 @@ class playerContentView: UIView {
     
     
     @objc func callButtonPressed() {
-        
+        print("call pressed ")
     }
     
     @objc func foldButtonPressed() {
-        
+        print("fold pressed")
     }
     
     @objc func raiseButtonPressed() {
-        
+        print(" raise pressed")
     }
     
     @objc func cancelPressed() {
-        
+        print(" cancel pressed")
     }
     
     @objc func bidPressed() {
-        
+        print(" bid pressed")
     }
     
     
