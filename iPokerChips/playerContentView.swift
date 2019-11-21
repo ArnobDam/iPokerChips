@@ -9,6 +9,11 @@
 import UIKit
 
 class playerContentView: UIView {
+    var redChipArray: [Chip] = []
+    var blueChipArray: [Chip] = []
+    var blackChipArray: [Chip] = []
+    var greenChipArray: [Chip] = []
+    
     
     var player: String?
     
@@ -103,9 +108,14 @@ class playerContentView: UIView {
         let blueChip4 = Chip(frame: CGRect(x: 10, y: 700, width: chipWidth, height: chipHeight), chipType: .blue)
         self.addSubview(blueChip4)
         
+        blueChipArray.append(blueChip)
+        blueChipArray.append(blueChip2)
+        blueChipArray.append(blueChip3)
+        blueChipArray.append(blueChip4)
+        
+        
         let redChip = Chip(frame: CGRect(x: 120, y: 760, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip)
-        
         let redChip2 = Chip(frame: CGRect(x: 120, y: 740, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip2)
         
@@ -114,6 +124,11 @@ class playerContentView: UIView {
         
         let redChip4 = Chip(frame: CGRect(x: 120, y: 700, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip4)
+        
+        redChipArray.append(redChip)
+        redChipArray.append(redChip2)
+        redChipArray.append(redChip3)
+        redChipArray.append(redChip4)
         
         
         let blackChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .black)
@@ -125,6 +140,12 @@ class playerContentView: UIView {
         let blackChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip4)
         
+        blackChipArray.append(blackChip)
+        blackChipArray.append(blackChip2)
+        blackChipArray.append(blackChip3)
+        blackChipArray.append(blackChip4)
+        
+        
         let greenChip = Chip(frame: CGRect(x: 220, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip)
         let greenChip2 = Chip(frame: CGRect(x: 220, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
@@ -134,14 +155,16 @@ class playerContentView: UIView {
         let greenChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip4)
         
-        
-        
-        
-        
-    
+        greenChipArray.append(greenChip)
+        greenChipArray.append(greenChip2)
+        greenChipArray.append(greenChip3)
+        greenChipArray.append(greenChip4)
         
     }
     
+    func optimize() {
+        
+    }
     
     
     
