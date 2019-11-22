@@ -14,10 +14,22 @@ class GameViewController: UIViewController {
     var playerNames: [String] = []
     var playerContentViews: [playerContentView] = []
     var currentPlayer = 0
+    var currentPotSize:Double!
     
+    var chipValues:[Chip.chipType:Double] = [:]
+
     
+    var currentPot:[Chip] = []
+    
+    var blueChipArray:[Chip] = []
+
+    
+    @IBOutlet weak var potLabel: UILabel!
+
     @IBAction func popOutMenu(_ sender: Any) {
-            goToNextPlayer()
+            //goToNextPlayer()
+        
+        addToPot(chips: blueChipArray)
         
         var  playerNameValues = [String: Double]()
         for playerView in playerContentViews {
@@ -26,6 +38,7 @@ class GameViewController: UIViewController {
         
 
     }
+
     
     @IBOutlet weak var contentScroll: UIScrollView!
 
@@ -50,7 +63,7 @@ class GameViewController: UIViewController {
         
         contentScroll.contentSize = CGSize(width: contentScroll.frame.size.width*CGFloat(playerNames.count), height: contentScroll.frame.size.height)
         contentScroll.contentSize.height = 1
-//        contentScroll.isUserInteractionEnabled = false
+        //contentScroll.isUserInteractionEnabled = false
 
         
         var currentWidth:CGFloat = 0
@@ -60,14 +73,55 @@ class GameViewController: UIViewController {
             contentScroll.addSubview(playerContent)
             currentWidth += self.view.frame.width
         }
+        currentPotSize = Double(0)
         
-
+        let chipWidth = 75
+        let chipHeight = 75
+        
+        let blueChip = Chip(frame: CGRect(x: 10, y: 360, width: chipWidth, height: chipHeight), chipType: .blue)
+        self.view.addSubview(blueChip)
+        let blueChip2 = Chip(frame: CGRect(x: 10, y: 340, width: chipWidth, height: chipHeight), chipType: .blue)
+        self.view.addSubview(blueChip2)
+        let blueChip3 = Chip(frame: CGRect(x: 10, y: 320, width: chipWidth, height: chipHeight), chipType: .blue)
+        self.view.addSubview(blueChip3)
+        let blueChip4 = Chip(frame: CGRect(x: 10, y: 300, width: chipWidth, height: chipHeight), chipType: .blue)
+        self.view.addSubview(blueChip4)
+        
+        blueChipArray.append(blueChip)
+        blueChipArray.append(blueChip2)
+        blueChipArray.append(blueChip3)
+        blueChipArray.append(blueChip4)
         
         
         
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    func addToPot(chips:[Chip]) {
+
+        for chip in chips {
+
+            currentPotSize += chipValues[chip.selfchipType]!
+            self.view.addSubview(chip)
+            currentPot.append(chip)
+            moveChipToPot(chip: chip)
+        }
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        
+        potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
+
+    }
+    
+    func moveChipToPot(chip:Chip) {
+
+        UIView.animate(withDuration: 0.7, animations: {
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 150 ..< 250)), width: 40, height: 40)
+        })
+    }
 
     /*
     // MARK: - Navigation

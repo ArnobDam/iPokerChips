@@ -8,7 +8,10 @@
 
 import UIKit
 
-class Chip: UIImageView {
+public class Chip: UIImageView {
+    
+    
+    var selfchipType:chipType!
     
     enum chipType: String {
         case blue = "BlueChip"
@@ -18,10 +21,11 @@ class Chip: UIImageView {
 
     }
     
+
     
     init(frame: CGRect, chipType:chipType) {
         super.init(frame: frame)
-        
+        selfchipType = chipType
         self.image = UIImage(imageLiteralResourceName: chipType.rawValue)
     }
     
