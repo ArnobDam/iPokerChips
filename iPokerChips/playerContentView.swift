@@ -36,29 +36,9 @@ class playerContentView: UIView {
         super.init(frame: frame)
         player = name
         displayView()
+        addRecognizerToChip()
         
-       let blackGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        blackGesture.minimumPressDuration = 0.0
-        
-        let blueGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        blueGesture.minimumPressDuration = 0.0
-        
-        let redGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        redGesture.minimumPressDuration = 0.0
-        
-        let greenGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        greenGesture.minimumPressDuration = 0.0
-        
-        draggapleChipBlue.addGestureRecognizer(blueGesture)
-        draggableChipRed.addGestureRecognizer(redGesture)
-        draggapleChipBlack.addGestureRecognizer(blackGesture)
-        draggableChipGreen.addGestureRecognizer(greenGesture)
-        
-        draggapleChipBlack.isUserInteractionEnabled = true
-        draggapleChipBlue.isUserInteractionEnabled = true
-        draggableChipGreen.isUserInteractionEnabled = true
-        draggableChipRed.isUserInteractionEnabled = true
-        self.isUserInteractionEnabled = true
+       
 
     }
     
@@ -84,6 +64,13 @@ class playerContentView: UIView {
             if (y < (self.frame.height / 2)) {
                 moveChipToPot(chip: recognizer.view as! Chip)
                 chipsToBid.append(recognizer.view as! Chip)
+                blackChipArray.removeLast()
+                
+                if (blackChipArray.count > 0) {
+                    draggapleChipBlack = blackChipArray[blackChipArray.count-1]
+                    addRecognizerToChip()
+                }
+               
             }
             else {
                 
@@ -94,6 +81,33 @@ class playerContentView: UIView {
         self.bringSubviewToFront(recognizer.view!)
 
     }
+    
+    func addRecognizerToChip() {
+        let blackGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        blackGesture.minimumPressDuration = 0.0
+        
+        let blueGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        blueGesture.minimumPressDuration = 0.0
+        
+        let redGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        redGesture.minimumPressDuration = 0.0
+        
+        let greenGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        greenGesture.minimumPressDuration = 0.0
+        
+        draggapleChipBlue.addGestureRecognizer(blueGesture)
+        draggableChipRed.addGestureRecognizer(redGesture)
+        draggapleChipBlack.addGestureRecognizer(blackGesture)
+        draggableChipGreen.addGestureRecognizer(greenGesture)
+        
+        draggapleChipBlack.isUserInteractionEnabled = true
+        draggapleChipBlue.isUserInteractionEnabled = true
+        draggableChipGreen.isUserInteractionEnabled = true
+        draggableChipRed.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
+    }
+    
+
     
     func moveChipToPot(chip:Chip) {
         
