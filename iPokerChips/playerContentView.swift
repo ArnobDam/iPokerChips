@@ -266,8 +266,16 @@ class playerContentView: UIView {
     
     @objc func callButtonPressed() {
         print("call pressed ")
-        let gameController = self.superview?.superview  as! GameViewController
-        gameController.addToPot(chips: chipsToBid)
+        
+        
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController{
+                topController = presentedViewController
+                topController.addToPot(chips: chipsToBid)
+            }
+            
+            // topController should now be your topmost view controller
+        }
     }
     
     @objc func foldButtonPressed() {
