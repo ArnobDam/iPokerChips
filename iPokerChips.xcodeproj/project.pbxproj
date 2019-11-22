@@ -20,6 +20,7 @@
 		9A4BC7DE23860ACB00CCE385 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */; };
 		9A4BC7E023860E1000CCE385 /* playerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BC7DF23860E1000CCE385 /* playerContentView.swift */; };
 		F345B1052386222F0085403D /* pView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345B1042386222F0085403D /* pView.swift */; };
+		F3FD50F52388854500248E93 /* nChips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD50F42388854500248E93 /* nChips.swift */; };
 		F9F62BB9238638150073BF24 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F62BB8238638150073BF24 /* Chip.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9A4BC7DF23860E1000CCE385 /* playerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerContentView.swift; sourceTree = "<group>"; };
 		F345B1042386222F0085403D /* pView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pView.swift; sourceTree = "<group>"; };
+		F3FD50F42388854500248E93 /* nChips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nChips.swift; sourceTree = "<group>"; };
 		F9F62BB8238638150073BF24 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 				7BA02B6E237A2EB3003354B8 /* AppDelegate.swift */,
 				7BA02B70237A2EB3003354B8 /* ViewController.swift */,
 				7BA02B72237A2EB3003354B8 /* Main.storyboard */,
+				F3FD50F42388854500248E93 /* nChips.swift */,
 				F345B1042386222F0085403D /* pView.swift */,
 				9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */,
 				F9F62BB8238638150073BF24 /* Chip.swift */,
@@ -282,6 +285,7 @@
 				9A1D8519237A42F300B2CC29 /* playersNames.swift in Sources */,
 				7BA02B71237A2EB3003354B8 /* ViewController.swift in Sources */,
 				F9F62BB9238638150073BF24 /* Chip.swift in Sources */,
+				F3FD50F52388854500248E93 /* nChips.swift in Sources */,
 				7BA02B6F237A2EB3003354B8 /* AppDelegate.swift in Sources */,
 				9A1D851B237A4AC700B2CC29 /* textFieldTableViewCell.swift in Sources */,
 				9A4BC7DE23860ACB00CCE385 /* GameViewController.swift in Sources */,
