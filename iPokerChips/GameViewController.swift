@@ -14,13 +14,18 @@ class GameViewController: UIViewController {
     var playerNames: [String] = []
     var playerContentViews: [playerContentView] = []
     var currentPlayer = 0
+    var currentPotSize:Double!
+    
+    var chipValues:[Chip.chipType:Double] = [:]
+
     
     var currentPot:[Chip] = []
     
     var blueChipArray:[Chip] = []
 
     
-    
+    @IBOutlet weak var potLabel: UILabel!
+
     @IBAction func popOutMenu(_ sender: Any) {
             //goToNextPlayer()
         
@@ -68,7 +73,7 @@ class GameViewController: UIViewController {
             contentScroll.addSubview(playerContent)
             currentWidth += self.view.frame.width
         }
-        
+        currentPotSize = Double(0)
         
         let chipWidth = 75
         let chipHeight = 75
@@ -95,18 +100,26 @@ class GameViewController: UIViewController {
     
     
     func addToPot(chips:[Chip]) {
+
         for chip in chips {
+
+            currentPotSize += chipValues[chip.selfchipType]!
             self.view.addSubview(chip)
             currentPot.append(chip)
             moveChipToPot(chip: chip)
         }
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
         
+        potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
+
     }
     
     func moveChipToPot(chip:Chip) {
 
         UIView.animate(withDuration: 0.7, animations: {
-            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 150 ..< 250)), width: chip.frame.width, height: chip.frame.width)
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 150 ..< 250)), width: 40, height: 40)
         })
     }
 
