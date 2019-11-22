@@ -9,18 +9,113 @@
 import UIKit
 
 class playerContentView: UIView {
+    var redChipArray: [Chip] = []
+    var blueChipArray: [Chip] = []
+    var blackChipArray: [Chip] = []
+    var greenChipArray: [Chip] = []
+    
+    var chipsToBid:[Chip] = []
+    
+    var currentValue: Double = 0
+
     
     var player: String?
+    
+    var draggapleChipBlue: Chip!
+    var draggapleChipBlack: Chip!
+    var draggableChipRed: Chip!
+    var draggableChipGreen: Chip!
+    
+    let chipWidth: CGFloat = 75
+    let chipHeight: CGFloat = 75
+    
+    var newCoord: CGPoint = CGPoint(x:0, y:0)
+    var firstCoord: CGPoint = CGPoint(x: 0, y: 0)
     
      init(frame: CGRect, name: String) {
         super.init(frame: frame)
         player = name
         displayView()
+        addRecognizerToChip()
+        
+       
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    @objc func handlePan(recognizer: UIPanGestureRecognizer) {
+        if (recognizer.view == nil) {
+            return
+        }
+
+        self.newCoord = recognizer.location(in: self)
+        let x = self.newCoord.x - (recognizer.view?.frame.width ?? 0) / 2
+        let y = self.newCoord.y - (recognizer.view?.frame.height ?? 0) / 2
+        recognizer.view!.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
+        
+        if (recognizer.state == UIGestureRecognizer.State.began) {
+            
+        }
+        
+        else if (recognizer.state == UIGestureRecognizer.State.ended) {
+            if (y < (self.frame.height / 2)) {
+                moveChipToPot(chip: recognizer.view as! Chip)
+                chipsToBid.append(recognizer.view as! Chip)
+                blackChipArray.removeLast()
+                
+                if (blackChipArray.count > 0) {
+                    draggapleChipBlack = blackChipArray[blackChipArray.count-1]
+                    addRecognizerToChip()
+                }
+               
+            }
+            else {
+                
+            }
+        }
+        
+        
+        self.bringSubviewToFront(recognizer.view!)
+
+    }
+    
+    func addRecognizerToChip() {
+        let blackGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        blackGesture.minimumPressDuration = 0.0
+        
+        let blueGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        blueGesture.minimumPressDuration = 0.0
+        
+        let redGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        redGesture.minimumPressDuration = 0.0
+        
+        let greenGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        greenGesture.minimumPressDuration = 0.0
+        
+        draggapleChipBlue.addGestureRecognizer(blueGesture)
+        draggableChipRed.addGestureRecognizer(redGesture)
+        draggapleChipBlack.addGestureRecognizer(blackGesture)
+        draggableChipGreen.addGestureRecognizer(greenGesture)
+        
+        draggapleChipBlack.isUserInteractionEnabled = true
+        draggapleChipBlue.isUserInteractionEnabled = true
+        draggableChipGreen.isUserInteractionEnabled = true
+        draggableChipRed.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
+    }
+    
+
+    
+    func moveChipToPot(chip:Chip) {
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 250 ..< 350)), width: 40, height: 40)
+        })
+    }
+    
     
     
     func displayView(){
@@ -103,8 +198,7 @@ class playerContentView: UIView {
         dragToRaise.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(dragToRaise)
         
-        var chipWidth = 75
-        var chipHeight = 75
+
         
         
         let blueChip = Chip(frame: CGRect(x: 10, y: 760, width: chipWidth, height: chipHeight), chipType: .blue)
@@ -116,9 +210,17 @@ class playerContentView: UIView {
         let blueChip4 = Chip(frame: CGRect(x: 10, y: 700, width: chipWidth, height: chipHeight), chipType: .blue)
         self.addSubview(blueChip4)
         
+        draggapleChipBlue = blueChip4
+        
+        
+        blueChipArray.append(blueChip)
+        blueChipArray.append(blueChip2)
+        blueChipArray.append(blueChip3)
+        blueChipArray.append(blueChip4)
+        
+        
         let redChip = Chip(frame: CGRect(x: 120, y: 760, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip)
-        
         let redChip2 = Chip(frame: CGRect(x: 120, y: 740, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip2)
         
@@ -127,6 +229,13 @@ class playerContentView: UIView {
         
         let redChip4 = Chip(frame: CGRect(x: 120, y: 700, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip4)
+        
+        draggableChipRed = redChip4
+        
+        redChipArray.append(redChip)
+        redChipArray.append(redChip2)
+        redChipArray.append(redChip3)
+        redChipArray.append(redChip4)
         
         
         let blackChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .black)
@@ -138,6 +247,14 @@ class playerContentView: UIView {
         let blackChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip4)
         
+        draggapleChipBlack = blackChip4
+        
+        blackChipArray.append(blackChip)
+        blackChipArray.append(blackChip2)
+        blackChipArray.append(blackChip3)
+        blackChipArray.append(blackChip4)
+        
+        
         let greenChip = Chip(frame: CGRect(x: 220, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip)
         let greenChip2 = Chip(frame: CGRect(x: 220, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
@@ -147,20 +264,24 @@ class playerContentView: UIView {
         let greenChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip4)
         
+        draggableChipGreen = greenChip4
         
-        
-        
-        
-    
+        greenChipArray.append(greenChip)
+        greenChipArray.append(greenChip2)
+        greenChipArray.append(greenChip3)
+        greenChipArray.append(greenChip4)
         
     }
-    
+
+
     
     
     
     
     @objc func callButtonPressed() {
         print("call pressed ")
+//        let gameController = self.superview?.superview  as! GameViewController
+//        gameController.addToPot(chips: chipsToBid)
     }
     
     @objc func foldButtonPressed() {
@@ -175,9 +296,6 @@ class playerContentView: UIView {
         print(" cancel pressed")
     }
     
-    @objc func bidPressed() {
-        print(" bid pressed")
-    }
     
     
 

@@ -13,6 +13,10 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     var playerNames:[String] = []
     var pickerData = ["$10", "$50","$100","$500","$1000"]
     
+    
+    var chipValues:[Chip.chipType:Double] = [:]
+
+    
     var handSize:Double!
 
     @IBOutlet weak var blindText: UILabel!
@@ -50,6 +54,13 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let redValue = 0.01*value
         let greenValue = 0.05*value
         let blackValue = 0.1*value
+        
+        chipValues[Chip.chipType.blue] = blueValue
+        chipValues[Chip.chipType.red] = redValue
+        chipValues[Chip.chipType.green] = greenValue
+        chipValues[Chip.chipType.black] = blackValue
+        
+        
         
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
@@ -111,6 +122,10 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         
         blindText.text = String(format: "%@ will start as the big blind, and %@ will start as the small blind!",playerNames[playerNames.count-1], playerNames[playerNames.count - 2])
+        
+        
+
+
     }
     
     
@@ -123,6 +138,7 @@ class ChipValueView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         gameViewController.playerNames = playerNames
         gameViewController.handSize = handSize
+        gameViewController.chipValues = chipValues 
         
         self.navigationController?.pushViewController(gameViewController, animated: true)
             
