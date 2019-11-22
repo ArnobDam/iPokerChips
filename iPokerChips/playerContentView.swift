@@ -18,15 +18,63 @@ class playerContentView: UIView {
     
     var player: String?
     
+    var draggapleChipBlue: Chip!
+    var draggapleChipBlack: Chip!
+    var draggableChipRed: Chip!
+    var draggableChipGreen: Chip!
+    
+    var newCoord: CGPoint = CGPoint(x:0, y:0)
+    var firstCoord: CGPoint = CGPoint(x: 0, y: 0)
+    
      init(frame: CGRect, name: String) {
         super.init(frame: frame)
         player = name
         displayView()
+        
+       let panGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        panGesture.minimumPressDuration = 0.0
+//        draggapleChipBlue.addGestureRecognizer(panGesture)
+//        draggableChipRed.addGestureRecognizer(panGesture)
+        draggapleChipBlack.addGestureRecognizer(panGesture)
+//        draggableChipGreen.addGestureRecognizer(panGesture)
+        
+        draggapleChipBlack.isUserInteractionEnabled = true
+//        draggapleChipBlue.isUserInteractionEnabled = true
+//        draggableChipGreen.isUserInteractionEnabled = true
+//        draggableChipRed.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    @objc func handlePan(recognizer: UIPanGestureRecognizer) {
+        if (recognizer.view == nil) {
+            return
+        }
+        if (recognizer.state == UIGestureRecognizer.State.began) {
+            
+        } else if (recognizer.state == UIGestureRecognizer.State.ended) {
+
+        }
+        self.newCoord = recognizer.location(in: self)
+        let x = self.newCoord.x - (recognizer.view?.frame.width ?? 0) / 2
+        let y = self.newCoord.y - (recognizer.view?.frame.height ?? 0) / 2
+        draggapleChipBlack.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
+        self.bringSubviewToFront(draggapleChipBlack)
+
+//        draggableChipGreen.frame = CGRect(x: x, y: y, width: draggableChipGreen.frame.width, height: draggableChipGreen.frame.height)
+//        self.bringSubviewToFront(draggableChipGreen)
+//
+//        draggapleChipBlue.frame = CGRect(x: x, y: y, width: draggapleChipBlue.frame.width, height: draggapleChipBlue.frame.height)
+//        self.bringSubviewToFront(draggapleChipBlue)
+//
+//        draggableChipRed.frame = CGRect(x: x, y: y, width: draggableChipRed.frame.width, height: draggableChipRed.frame.height)
+//        self.bringSubviewToFront(draggableChipRed)
+    }
+    
     
     
     func displayView(){
@@ -122,6 +170,9 @@ class playerContentView: UIView {
         let blueChip4 = Chip(frame: CGRect(x: 10, y: 700, width: chipWidth, height: chipHeight), chipType: .blue)
         self.addSubview(blueChip4)
         
+        draggapleChipBlue = blueChip4
+        
+        
         blueChipArray.append(blueChip)
         blueChipArray.append(blueChip2)
         blueChipArray.append(blueChip3)
@@ -139,6 +190,8 @@ class playerContentView: UIView {
         let redChip4 = Chip(frame: CGRect(x: 120, y: 700, width: chipWidth, height: chipHeight), chipType: .red)
         self.addSubview(redChip4)
         
+        draggableChipRed = redChip4
+        
         redChipArray.append(redChip)
         redChipArray.append(redChip2)
         redChipArray.append(redChip3)
@@ -153,6 +206,8 @@ class playerContentView: UIView {
         self.addSubview(blackChip3)
         let blackChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
         self.addSubview(blackChip4)
+        
+        draggapleChipBlack = blackChip4
         
         blackChipArray.append(blackChip)
         blackChipArray.append(blackChip2)
@@ -169,16 +224,16 @@ class playerContentView: UIView {
         let greenChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
         self.addSubview(greenChip4)
         
+        draggableChipGreen = greenChip4
+        
         greenChipArray.append(greenChip)
         greenChipArray.append(greenChip2)
         greenChipArray.append(greenChip3)
         greenChipArray.append(greenChip4)
         
     }
-    
-    func optimize() {
-        
-    }
+
+
     
     
     
