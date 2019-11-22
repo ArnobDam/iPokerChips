@@ -93,7 +93,6 @@ class GameViewController: UIViewController {
         blueChipArray.append(blueChip4)
         
         
-        
         // Do any additional setup after loading the view.
     }
     
@@ -117,6 +116,7 @@ class GameViewController: UIViewController {
     }
     
     func moveChipToPot(chip:Chip) {
+
 
         UIView.animate(withDuration: 0.7, animations: {
             chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 150 ..< 250)), width: 40, height: 40)
