@@ -21,6 +21,7 @@
 		9A4BC7DE23860ACB00CCE385 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */; };
 		9A4BC7E023860E1000CCE385 /* playerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BC7DF23860E1000CCE385 /* playerContentView.swift */; };
 		F345B1052386222F0085403D /* pView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345B1042386222F0085403D /* pView.swift */; };
+		F3FD50F52388854500248E93 /* nChips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD50F42388854500248E93 /* nChips.swift */; };
 		F9F62BB9238638150073BF24 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F62BB8238638150073BF24 /* Chip.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9A4BC7DF23860E1000CCE385 /* playerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerContentView.swift; sourceTree = "<group>"; };
 		F345B1042386222F0085403D /* pView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pView.swift; sourceTree = "<group>"; };
+		F3FD50F42388854500248E93 /* nChips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nChips.swift; sourceTree = "<group>"; };
 		F9F62BB8238638150073BF24 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
