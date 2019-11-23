@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
         for playerView in playerContentViews {
             playerNameValues[playerView.player!] = playerView.currentValue
         }*/
-        
+         
         
         
         playerContentViews[currentPlayer].addChipsFromPot(chips: currentPot)
