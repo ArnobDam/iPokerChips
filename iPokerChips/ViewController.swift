@@ -71,6 +71,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         super.viewDidLoad()
         
+        
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"green background")!)
         
         UIGraphicsBeginImageContext(self.view.frame.size)
