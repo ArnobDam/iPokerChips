@@ -14,6 +14,7 @@
 		7BA02B79237A2EB4003354B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA02B77237A2EB4003354B8 /* LaunchScreen.storyboard */; };
 		7BA02B84237A2EB4003354B8 /* iPokerChipsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA02B83237A2EB4003354B8 /* iPokerChipsTests.swift */; };
 		7BA02B8F237A2EB4003354B8 /* iPokerChipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA02B8E237A2EB4003354B8 /* iPokerChipsUITests.swift */; };
+		91ACD5E323888E32000C61C4 /* numberofchipsinitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACD5E223888E32000C61C4 /* numberofchipsinitial.swift */; };
 		9A1D8519237A42F300B2CC29 /* playersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8518237A42F300B2CC29 /* playersNames.swift */; };
 		9A1D851B237A4AC700B2CC29 /* textFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D851A237A4AC700B2CC29 /* textFieldTableViewCell.swift */; };
 		9A454A042383703F0025CEE8 /* ChipValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A454A032383703F0025CEE8 /* ChipValueView.swift */; };
@@ -54,6 +55,7 @@
 		7BA02B8A237A2EB4003354B8 /* iPokerChipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPokerChipsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA02B8E237A2EB4003354B8 /* iPokerChipsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPokerChipsUITests.swift; sourceTree = "<group>"; };
 		7BA02B90237A2EB4003354B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91ACD5E223888E32000C61C4 /* numberofchipsinitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = numberofchipsinitial.swift; sourceTree = "<group>"; };
 		9A1D8518237A42F300B2CC29 /* playersNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playersNames.swift; sourceTree = "<group>"; };
 		9A1D851A237A4AC700B2CC29 /* textFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldTableViewCell.swift; sourceTree = "<group>"; };
 		9A454A032383703F0025CEE8 /* ChipValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipValueView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				7BA02B6E237A2EB3003354B8 /* AppDelegate.swift */,
 				7BA02B70237A2EB3003354B8 /* ViewController.swift */,
 				7BA02B72237A2EB3003354B8 /* Main.storyboard */,
+				91ACD5E223888E32000C61C4 /* numberofchipsinitial.swift */,
 				F345B1042386222F0085403D /* pView.swift */,
 				9A4BC7DD23860ACB00CCE385 /* GameViewController.swift */,
 				F9F62BB8238638150073BF24 /* Chip.swift */,
@@ -282,6 +285,7 @@
 				9A1D8519237A42F300B2CC29 /* playersNames.swift in Sources */,
 				7BA02B71237A2EB3003354B8 /* ViewController.swift in Sources */,
 				F9F62BB9238638150073BF24 /* Chip.swift in Sources */,
+				91ACD5E323888E32000C61C4 /* numberofchipsinitial.swift in Sources */,
 				7BA02B6F237A2EB3003354B8 /* AppDelegate.swift in Sources */,
 				9A1D851B237A4AC700B2CC29 /* textFieldTableViewCell.swift in Sources */,
 				9A4BC7DE23860ACB00CCE385 /* GameViewController.swift in Sources */,
