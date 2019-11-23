@@ -9,9 +9,9 @@
 import Foundation
 
 //parameter this takes in is Current Hand Size ($)
-func numberOfChips (currentDollarHandSize:Double) -> [Chip.chipType:Int] {
+func numberOfChips10 (currentDollarHandSize:Double) -> [Chip.chipType:Int] {
     
-        var startingHandSize: String!
+        //var startingHandSize: String!
         
         var nBlueChips: Double!
         var nRedChips: Double!
@@ -132,8 +132,9 @@ func numberOfChips (currentDollarHandSize:Double) -> [Chip.chipType:Int] {
     var chipNumbers:[Chip.chipType:Int] = [:]
     chipNumbers[.blue] = blue
     chipNumbers[.red] = red
-    chipNumbers[.black] = black
     chipNumbers[.green] = green
+    chipNumbers[.black] = black
+    
     
     return chipNumbers
 
