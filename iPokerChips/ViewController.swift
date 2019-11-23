@@ -72,6 +72,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         
+       print( numberOfChips(startingHandSize:500
+    ))
+        
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"green background")!)
         
         UIGraphicsBeginImageContext(self.view.frame.size)

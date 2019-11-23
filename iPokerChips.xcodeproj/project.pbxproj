@@ -14,6 +14,7 @@
 		7BA02B79237A2EB4003354B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA02B77237A2EB4003354B8 /* LaunchScreen.storyboard */; };
 		7BA02B84237A2EB4003354B8 /* iPokerChipsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA02B83237A2EB4003354B8 /* iPokerChipsTests.swift */; };
 		7BA02B8F237A2EB4003354B8 /* iPokerChipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA02B8E237A2EB4003354B8 /* iPokerChipsUITests.swift */; };
+		91ACD5E323888E32000C61C4 /* numberofchipsinitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACD5E223888E32000C61C4 /* numberofchipsinitial.swift */; };
 		9A1D8519237A42F300B2CC29 /* playersNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8518237A42F300B2CC29 /* playersNames.swift */; };
 		9A1D851B237A4AC700B2CC29 /* textFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D851A237A4AC700B2CC29 /* textFieldTableViewCell.swift */; };
 		9A454A042383703F0025CEE8 /* ChipValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A454A032383703F0025CEE8 /* ChipValueView.swift */; };
@@ -55,6 +56,7 @@
 		7BA02B8A237A2EB4003354B8 /* iPokerChipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPokerChipsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA02B8E237A2EB4003354B8 /* iPokerChipsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPokerChipsUITests.swift; sourceTree = "<group>"; };
 		7BA02B90237A2EB4003354B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91ACD5E223888E32000C61C4 /* numberofchipsinitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = numberofchipsinitial.swift; sourceTree = "<group>"; };
 		9A1D8518237A42F300B2CC29 /* playersNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playersNames.swift; sourceTree = "<group>"; };
 		9A1D851A237A4AC700B2CC29 /* textFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldTableViewCell.swift; sourceTree = "<group>"; };
 		9A454A032383703F0025CEE8 /* ChipValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipValueView.swift; sourceTree = "<group>"; };
