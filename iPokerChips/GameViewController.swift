@@ -22,6 +22,10 @@ class GameViewController: UIViewController {
     var currentPot:[Chip] = []
     
     var blueChipArray:[Chip] = []
+    
+    
+    let formatter = NumberFormatter()
+
 
     
     @IBOutlet weak var potLabel: UILabel!
@@ -48,10 +52,13 @@ class GameViewController: UIViewController {
     func giveChipsFromPot () {
         
         potLabel.text = ""
-        
         playerContentViews[currentPlayer].addChipsFromPot(chips: currentPot)
-        
         currentPot.removeAll()
+        currentPotSize = 0
+        
+        
+        potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
+
         
     }
 
@@ -98,6 +105,11 @@ class GameViewController: UIViewController {
         }
         currentPotSize = Double(0)
         
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        
+        potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
+        
         
         let potView = UIView(frame: CGRect(x: 56, y: 50, width: 200, height: 200))
         let dashedBorder = CAShapeLayer()
@@ -120,7 +132,6 @@ class GameViewController: UIViewController {
         dashedMarker.layer.addSublayer(dashes)
         self.view.addSubview(dashedMarker)
         
-        potLabel.text = ""
         
         
         // Do any additional setup after loading the view.
@@ -138,9 +149,7 @@ class GameViewController: UIViewController {
             currentPot.append(chip)
             moveChipToPot(chip: chip)
         }
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
+
         
         potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
 
