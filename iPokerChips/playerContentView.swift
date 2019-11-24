@@ -68,7 +68,7 @@ class playerContentView: UIView {
                 
                 if (blackChipArray.count > 0) {
                     draggapleChipBlack = blackChipArray[blackChipArray.count-1]
-                    addRecognizerToChip()
+                    addRecognizerToChip() 
                 }
                
             }
