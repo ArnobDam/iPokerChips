@@ -142,8 +142,16 @@ class GameViewController: UIViewController {
     func addToPot(chips:[Chip]) {
 
         for chip in chips {
-            chip.removeGestureRecognizer(chip.gestureRecognizers![0])
+            
+            /*if chip.gestureRecognizers?.count != 0{
+                chip.removeGestureRecognizer((chip.gestureRecognizers?[0])!)
+            }
+            */
+            if let recognizers = chip.gestureRecognizers {
+                chip.removeGestureRecognizer(recognizers[0])
 
+            }
+            
             currentPotSize += chipValues[chip.selfchipType]!
             self.view.addSubview(chip)
             currentPot.append(chip)
