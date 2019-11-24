@@ -35,9 +35,14 @@ class playerContentView: UIView {
     var chipsToBid:[Chip] = []
     
     var currentValue: Double = 0
+    
+    var shouldHighlight = false
 
     
     var player: String?
+    
+    
+    var highlightedView:UIView!
     
     var draggapleChipBlue: Chip!
     var draggapleChipBlack: Chip!
@@ -72,15 +77,18 @@ class playerContentView: UIView {
         recognizer.view!.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
         
         if (recognizer.state == UIGestureRecognizer.State.began) {
+            highlightView()
+            shouldHighlight = true
             
         }
         
         else if (recognizer.state == UIGestureRecognizer.State.ended) {
+            shouldHighlight = false
             if (y < (self.frame.height / 2)) {
                 moveChipToPot(chip: recognizer.view as! Chip)
                 removeChipFromStack(chip:recognizer.view as! Chip)
                 chipsToBid.append(recognizer.view as! Chip)
-                
+                showBidButtons()
                 
                 
                 //blackChipArray.removeLast()
@@ -293,12 +301,15 @@ class playerContentView: UIView {
         
     }
     
-    
+    var raiseButton:UIButton!
+    var callButton:UIButton!
+    var foldButton:UIButton!
+    var cancelButton:UIButton!
     
     
     
     func displayView(){
-        let callButton = UIButton(frame: CGRect(x: 30, y: 430, width: 150, height: 50))
+        callButton =   UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
         
         callButton.setTitle("Call/Check", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -310,8 +321,7 @@ class playerContentView: UIView {
         callButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(callButton)
         
-        let foldButton = UIButton(frame: CGRect(x: 240, y: 430, width: 150, height: 50))
-        
+        foldButton = UIButton(frame: CGRect(x: 30, y: 510, width: 150, height: 50))
         foldButton.setTitle("Fold", for: .normal)
         foldButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         foldButton.addTarget(self, action: #selector(foldButtonPressed), for: .touchUpInside)
@@ -323,7 +333,7 @@ class playerContentView: UIView {
         foldButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(foldButton)
         
-        let raiseButton = UIButton(frame: CGRect(x: 30, y: 510, width: 150, height: 50))
+        raiseButton = UIButton(frame: CGRect(x: 240, y: 430, width: 150, height: 50))
         
         raiseButton.setTitle("Raise", for: .normal)
         raiseButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -335,20 +345,22 @@ class playerContentView: UIView {
         raiseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         raiseButton.backgroundColor  = UIColor.orange
         self.addSubview(raiseButton)
+        raiseButton.isHidden = true
         
-        let cancel = UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
+        cancelButton = UIButton(frame: CGRect(x: 30, y: 430, width: 150, height: 50))
         
-        cancel.setTitle("Reset", for: .normal)
-        cancel.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
-        cancel.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
-        cancel.layer.cornerRadius = 5
-        cancel.layer.borderWidth = 1
-        cancel.layer.borderColor = UIColor.white.cgColor
+        cancelButton.setTitle("Reset", for: .normal)
+        cancelButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
+        cancelButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.white.cgColor
         //cancel.titleLabel?.textColor = UIColor.red
-        cancel.setTitleColor(.white, for: .normal)
-        cancel.backgroundColor  = UIColor.init(displayP3Red: 255, green: 0, blue: 0, alpha: 0.5)
-        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        self.addSubview(cancel)
+        cancelButton.setTitleColor(.white, for: .normal)
+        cancelButton.backgroundColor  = UIColor.init(displayP3Red: 255, green: 0, blue: 0, alpha: 0.5)
+        cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.addSubview(cancelButton)
+        cancelButton.isHidden = true
         
 //        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 100, height: 50))
 //
@@ -363,7 +375,8 @@ class playerContentView: UIView {
         
 //        creating labels
         
-        let playerTitle = UILabel(frame: CGRect(x: 120, y: 10, width: 200, height: 100))
+        let playerTitle = UILabel(frame: CGRect(x: 136, y: -49, width: 150, height: 150
+        ))
         playerTitle.text = player
         playerTitle.font = UIFont (name: "Gurmukhi MN", size: 30)
         playerTitle.textColor = UIColor.white
@@ -456,31 +469,87 @@ class playerContentView: UIView {
         addGestureRecognizerToChip(chip: redChip4)
         addGestureRecognizerToChip(chip: blackChip4)
         
+        
+        
+        
+        
+        highlightedView = UIView(frame: CGRect(x: 0, y: -45, width: 414, height: 420))
+        highlightedView.backgroundColor = UIColor(displayP3Red: 255, green: 255, blue: 237, alpha: 1)
+        highlightedView.alpha = 0
+        self.addSubview(highlightedView)
+        
+    }
+    
+    
+    func showBidButtons()  {
+        if cancelButton.isHidden {
+            
+            self.cancelButton.alpha = 0
+            self.raiseButton.alpha = 0
+            self.cancelButton.isHidden = false
+            self.raiseButton.isHidden = false
+            
+            UIView.animate(withDuration: 0.5, animations: {
+ 
+                self.cancelButton.alpha = 1
+                self.raiseButton.alpha = 1
+            })
+        }
+        
     }
 
+    func highlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+                    self.highlightedView.alpha = 0.2
+        }, completion: { (finished: Bool) in
+            self.unhighlightView()
 
+        })
+    }
+    
+    
+    func unhighlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.highlightedView.alpha = 0
+        }, completion: { (finished: Bool) in
+            if self.shouldHighlight {
+
+                self.highlightView()
+            }
+        })
+    }
     
 
     
     @objc func callButtonPressed() {
         print("call pressed ")
-        
-        if let topController = UIApplication.topViewController() as? GameViewController {
-            topController.addToPot(chips: chipsToBid)
-        }
+
         
     }
     
     @objc func foldButtonPressed() {
-        print("fold pressed")
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.goToNextPlayer()
+        }
     }
     
     @objc func raiseButtonPressed() {
-        print(" raise pressed")
+        
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.addToPot(chips: chipsToBid)
+        }
     }
     
     @objc func cancelPressed() {
         print(" cancel pressed")
+        
+        
+        for chip in chipsToBid{
+            addChipToStack(chip: chip)
+        }
+        chipsToBid.removeAll()
     }
     
     //commit
