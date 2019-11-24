@@ -71,6 +71,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         super.viewDidLoad()
         
+        //all should come out to 19 blue
+        print(numberOfChips10(currentDollarHandSize:0.95))
+        print(numberOfChips50(currentDollarHandSize:4.75))
+        print(numberOfChips100(currentDollarHandSize:9.50))
+        print(numberOfChips500(currentDollarHandSize:47.50))
+        print(numberOfChips1000(currentDollarHandSize:95))
+        
+        //all should come out to 4 black, 6 green, 21 red, and 20 blue
+        print(numberOfChips10(currentDollarHandSize:10.10))
+        print(numberOfChips50(currentDollarHandSize:50.50))
+        print(numberOfChips100(currentDollarHandSize:101))
+        print(numberOfChips500(currentDollarHandSize:505))
+        print(numberOfChips1000(currentDollarHandSize:1010))
+        
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"green background")!)
         
         UIGraphicsBeginImageContext(self.view.frame.size)

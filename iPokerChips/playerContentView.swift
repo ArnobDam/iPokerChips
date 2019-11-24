@@ -5,8 +5,26 @@
 //  Created by Billy Habimana Cyusa on 11/20/19.
 //  Copyright © 2019 Nicholas Deily. All rights reserved.
 //
-
 import UIKit
+
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}
+
 
 class playerContentView: UIView {
     var redChipArray: [Chip] = []
@@ -17,9 +35,14 @@ class playerContentView: UIView {
     var chipsToBid:[Chip] = []
     
     var currentValue: Double = 0
+    
+    var shouldHighlight = false
 
     
     var player: String?
+    
+    
+    var highlightedView:UIView!
     
     var draggapleChipBlue: Chip!
     var draggapleChipBlack: Chip!
@@ -36,10 +59,7 @@ class playerContentView: UIView {
         super.init(frame: frame)
         player = name
         displayView()
-        addRecognizerToChip()
-        
-       
-
+       // addRecognizerToChip()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,22 +77,32 @@ class playerContentView: UIView {
         recognizer.view!.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
         
         if (recognizer.state == UIGestureRecognizer.State.began) {
+            highlightView()
+            shouldHighlight = true
             
         }
         
         else if (recognizer.state == UIGestureRecognizer.State.ended) {
+            shouldHighlight = false
             if (y < (self.frame.height / 2)) {
                 moveChipToPot(chip: recognizer.view as! Chip)
+                removeChipFromStack(chip:recognizer.view as! Chip)
                 chipsToBid.append(recognizer.view as! Chip)
-                blackChipArray.removeLast()
+                showBidButtons()
                 
-                if (blackChipArray.count > 0) {
+                
+                //blackChipArray.removeLast()
+                
+                
+                
+               /* if (blackChipArray.count > 0) {
                     draggapleChipBlack = blackChipArray[blackChipArray.count-1]
-                    addRecognizerToChip() 
-                }
+                    addRecognizerToChip()
+                }*/
                
             }
             else {
+                addChipToStack(chip: recognizer.view as! Chip)
                 
             }
         }
@@ -81,7 +111,7 @@ class playerContentView: UIView {
         self.bringSubviewToFront(recognizer.view!)
 
     }
-    
+    /*
     func addRecognizerToChip() {
         let blackGesture = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         blackGesture.minimumPressDuration = 0.0
@@ -106,7 +136,153 @@ class playerContentView: UIView {
         draggableChipRed.isUserInteractionEnabled = true
         self.isUserInteractionEnabled = true
     }
+    */
     
+    
+    func addChipToStack (chip:Chip) {
+        if chip.selfchipType == Chip.chipType.blue{
+            
+            
+            if !blueChipArray.contains(chip) {
+                blueChipArray.append(chip)
+                
+                if blueChipArray.count > 1 {
+                    let previousChip = blueChipArray[blueChipArray.count - 2]
+                    if !previousChip.gestureRecognizers!.isEmpty {
+                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    }
+                }
+            }
+        
+            let frame = CGRect(x: 10, y: 760-CGFloat(20*(blueChipArray.count-1)), width: chipWidth, height: chipHeight)
+            moveChipTo(chip: chip, frame: frame)
+
+            }
+        
+        
+        
+        if chip.selfchipType == Chip.chipType.red{
+            
+            if !redChipArray.contains(chip) {
+                redChipArray.append(chip)
+                
+                if redChipArray.count > 1 {
+                    let previousChip = redChipArray[redChipArray.count - 2]
+                    if !previousChip.gestureRecognizers!.isEmpty {
+                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    }
+                }
+            }
+            let frame = CGRect(x: 120, y: 760-CGFloat(20*(redChipArray.count-1)), width: chipWidth, height: chipHeight)
+            moveChipTo(chip: chip, frame: frame)
+            
+
+        }
+        
+        
+        if chip.selfchipType == Chip.chipType.black{
+            
+            if !blackChipArray.contains(chip) {
+                blackChipArray.append(chip)
+                if blackChipArray.count > 1 {
+                    let previousChip = blackChipArray[blackChipArray.count - 2]
+                    if !previousChip.gestureRecognizers!.isEmpty {
+                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    }
+                }
+            }
+            let frame = CGRect(x: 320, y: 760-CGFloat(20*(blackChipArray.count-1)), width: chipWidth, height: chipHeight)
+            moveChipTo(chip: chip, frame: frame)
+
+        }
+        
+        
+        if chip.selfchipType == Chip.chipType.green{
+            
+            if !greenChipArray.contains(chip) {
+                greenChipArray.append(chip)
+                
+                if greenChipArray.count > 1 {
+                    let previousChip = greenChipArray[greenChipArray.count - 2]
+                    if !previousChip.gestureRecognizers!.isEmpty {
+                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    }
+                }
+            }
+            
+            let frame = CGRect(x: 220, y: 760-CGFloat(20*(greenChipArray.count-1)), width: chipWidth, height: chipHeight)
+            moveChipTo(chip: chip, frame: frame)
+            
+        }
+        
+        
+        
+    }
+    
+    func moveChipTo (chip:Chip, frame: CGRect) {
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            chip.frame = frame
+        })
+        
+    }
+    
+    
+    func addGestureRecognizerToChip(chip:Chip) {
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        gestureRecognizer.minimumPressDuration = 0.0
+        chip.addGestureRecognizer(gestureRecognizer)
+        chip.isUserInteractionEnabled = true
+    }
+    
+    
+    func removeChipFromStack (chip:Chip){
+        if chip.selfchipType == Chip.chipType.blue{
+            if let index = blueChipArray.firstIndex(of: chip) {
+                print(index)
+                blueChipArray.remove(at: index)
+                if blueChipArray.count > 0 {
+                    addGestureRecognizerToChip(chip: blueChipArray[blueChipArray.count - 1])
+                }
+            }
+        }
+        
+        
+        
+        if chip.selfchipType == Chip.chipType.red{
+            if let index = redChipArray.firstIndex(of: chip) {
+                print(index)
+                redChipArray.remove(at: index)
+                if redChipArray.count > 0 {
+                    addGestureRecognizerToChip(chip: redChipArray[redChipArray.count - 1])
+                }
+            }
+        }
+        
+        
+        if chip.selfchipType == Chip.chipType.black{
+            if let index = blackChipArray.firstIndex(of: chip) {
+                print(index)
+                blackChipArray.remove(at: index)
+                if blackChipArray.count > 0 {
+                    addGestureRecognizerToChip(chip: blackChipArray[blackChipArray.count - 1])
+                }
+            }
+        }
+        
+        
+        
+        if chip.selfchipType == Chip.chipType.green{
+            if let index = greenChipArray.firstIndex(of: chip) {
+                print(index)
+                greenChipArray.remove(at: index)
+                if greenChipArray.count > 0 {
+                    addGestureRecognizerToChip(chip: greenChipArray[greenChipArray.count - 1])
+                }
+            }
+        }
+        
+    }
 
     
     func moveChipToPot(chip:Chip) {
@@ -116,10 +292,24 @@ class playerContentView: UIView {
         })
     }
     
+    func addChipsFromPot(chips:[Chip]) {
+        
+        for chip in chips{
+            self.addSubview(chip)
+            addChipToStack(chip: chip)
+        }
+        
+    }
+    
+    var raiseButton:UIButton!
+    var callButton:UIButton!
+    var foldButton:UIButton!
+    var cancelButton:UIButton!
+    
     
     
     func displayView(){
-        let callButton = UIButton(frame: CGRect(x: 30, y: 430, width: 150, height: 50))
+        callButton =   UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
         
         callButton.setTitle("Call/Check", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -131,8 +321,7 @@ class playerContentView: UIView {
         callButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(callButton)
         
-        let foldButton = UIButton(frame: CGRect(x: 240, y: 430, width: 150, height: 50))
-        
+        foldButton = UIButton(frame: CGRect(x: 30, y: 510, width: 150, height: 50))
         foldButton.setTitle("Fold", for: .normal)
         foldButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         foldButton.addTarget(self, action: #selector(foldButtonPressed), for: .touchUpInside)
@@ -144,7 +333,7 @@ class playerContentView: UIView {
         foldButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(foldButton)
         
-        let raiseButton = UIButton(frame: CGRect(x: 30, y: 510, width: 150, height: 50))
+        raiseButton = UIButton(frame: CGRect(x: 240, y: 430, width: 150, height: 50))
         
         raiseButton.setTitle("Raise", for: .normal)
         raiseButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
@@ -156,20 +345,22 @@ class playerContentView: UIView {
         raiseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         raiseButton.backgroundColor  = UIColor.orange
         self.addSubview(raiseButton)
+        raiseButton.isHidden = true
         
-        let cancel = UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
+        cancelButton = UIButton(frame: CGRect(x: 30, y: 430, width: 150, height: 50))
         
-        cancel.setTitle("Reset", for: .normal)
-        cancel.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
-        cancel.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
-        cancel.layer.cornerRadius = 5
-        cancel.layer.borderWidth = 1
-        cancel.layer.borderColor = UIColor.white.cgColor
+        cancelButton.setTitle("Reset", for: .normal)
+        cancelButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
+        cancelButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.white.cgColor
         //cancel.titleLabel?.textColor = UIColor.red
-        cancel.setTitleColor(.white, for: .normal)
-        cancel.backgroundColor  = UIColor.init(displayP3Red: 255, green: 0, blue: 0, alpha: 0.5)
-        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        self.addSubview(cancel)
+        cancelButton.setTitleColor(.white, for: .normal)
+        cancelButton.backgroundColor  = UIColor.init(displayP3Red: 255, green: 0, blue: 0, alpha: 0.5)
+        cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.addSubview(cancelButton)
+        cancelButton.isHidden = true
         
 //        let bid = UIButton(frame: CGRect(x: 300, y: 100, width: 100, height: 50))
 //
@@ -184,7 +375,8 @@ class playerContentView: UIView {
         
 //        creating labels
         
-        let playerTitle = UILabel(frame: CGRect(x: 120, y: 10, width: 200, height: 100))
+        let playerTitle = UILabel(frame: CGRect(x: 136, y: -49, width: 150, height: 150
+        ))
         playerTitle.text = player
         playerTitle.font = UIFont (name: "Gurmukhi MN", size: 30)
         playerTitle.textColor = UIColor.white
@@ -271,29 +463,94 @@ class playerContentView: UIView {
         greenChipArray.append(greenChip3)
         greenChipArray.append(greenChip4)
         
+        
+        addGestureRecognizerToChip(chip: blueChip4)
+        addGestureRecognizerToChip(chip: greenChip4)
+        addGestureRecognizerToChip(chip: redChip4)
+        addGestureRecognizerToChip(chip: blackChip4)
+        
+        
+        
+        
+        
+        highlightedView = UIView(frame: CGRect(x: 0, y: -45, width: 414, height: 420))
+        highlightedView.backgroundColor = UIColor(displayP3Red: 255, green: 255, blue: 237, alpha: 1)
+        highlightedView.alpha = 0
+        self.addSubview(highlightedView)
+        
+    }
+    
+    
+    func showBidButtons()  {
+        if cancelButton.isHidden {
+            
+            self.cancelButton.alpha = 0
+            self.raiseButton.alpha = 0
+            self.cancelButton.isHidden = false
+            self.raiseButton.isHidden = false
+            
+            UIView.animate(withDuration: 0.5, animations: {
+ 
+                self.cancelButton.alpha = 1
+                self.raiseButton.alpha = 1
+            })
+        }
+        
     }
 
+    func highlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+                    self.highlightedView.alpha = 0.2
+        }, completion: { (finished: Bool) in
+            self.unhighlightView()
 
+        })
+    }
     
     
+    func unhighlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.highlightedView.alpha = 0
+        }, completion: { (finished: Bool) in
+            if self.shouldHighlight {
+
+                self.highlightView()
+            }
+        })
+    }
     
+    
+    //test
     
     @objc func callButtonPressed() {
         print("call pressed ")
-//        let gameController = self.superview?.superview  as! GameViewController
-//        gameController.addToPot(chips: chipsToBid)
+
+        
     }
     
     @objc func foldButtonPressed() {
-        print("fold pressed")
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.goToNextPlayer()
+        }
     }
     
     @objc func raiseButtonPressed() {
-        print(" raise pressed")
+        
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.addToPot(chips: chipsToBid)
+        }
     }
     
     @objc func cancelPressed() {
         print(" cancel pressed")
+        
+        
+        for chip in chipsToBid{
+            addChipToStack(chip: chip)
+        }
+        chipsToBid.removeAll()
     }
     
     
