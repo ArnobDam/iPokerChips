@@ -297,6 +297,9 @@ class playerContentView: UIView {
         for chip in chips{
             self.addSubview(chip)
             addChipToStack(chip: chip)
+            if chip.gestureRecognizers?.count == 0 {
+                addGestureRecognizerToChip(chip:chip)
+            }
         }
         
     }

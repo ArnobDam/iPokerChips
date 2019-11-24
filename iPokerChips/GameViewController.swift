@@ -38,11 +38,21 @@ class GameViewController: UIViewController {
          
         
         
+        giveChipsFromPot()
+
+        
+
+    }
+    
+    
+    func giveChipsFromPot () {
+        
+        potLabel.text = ""
+        
         playerContentViews[currentPlayer].addChipsFromPot(chips: currentPot)
         
         currentPot.removeAll()
         
-
     }
 
     
@@ -121,6 +131,7 @@ class GameViewController: UIViewController {
     func addToPot(chips:[Chip]) {
 
         for chip in chips {
+            chip.removeGestureRecognizer(chip.gestureRecognizers![0])
 
             currentPotSize += chipValues[chip.selfchipType]!
             self.view.addSubview(chip)
