@@ -148,9 +148,14 @@ class playerContentView: UIView {
                 
                 if blueChipArray.count > 1 {
                     let previousChip = blueChipArray[blueChipArray.count - 2]
-                    if !previousChip.gestureRecognizers!.isEmpty {
-                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    if let recognizer = previousChip.gestureRecognizers {
+                        previousChip.removeGestureRecognizer(recognizer[0])
+
                     }
+                    
+                    
+                    
+                    
                 }
             }
         
@@ -168,8 +173,9 @@ class playerContentView: UIView {
                 
                 if redChipArray.count > 1 {
                     let previousChip = redChipArray[redChipArray.count - 2]
-                    if !previousChip.gestureRecognizers!.isEmpty {
-                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    if let recognizer = previousChip.gestureRecognizers {
+                        previousChip.removeGestureRecognizer(recognizer[0])
+                        
                     }
                 }
             }
@@ -186,8 +192,9 @@ class playerContentView: UIView {
                 blackChipArray.append(chip)
                 if blackChipArray.count > 1 {
                     let previousChip = blackChipArray[blackChipArray.count - 2]
-                    if !previousChip.gestureRecognizers!.isEmpty {
-                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    if let recognizer = previousChip.gestureRecognizers {
+                        previousChip.removeGestureRecognizer(recognizer[0])
+                        
                     }
                 }
             }
@@ -204,8 +211,9 @@ class playerContentView: UIView {
                 
                 if greenChipArray.count > 1 {
                     let previousChip = greenChipArray[greenChipArray.count - 2]
-                    if !previousChip.gestureRecognizers!.isEmpty {
-                        previousChip.removeGestureRecognizer(previousChip.gestureRecognizers![0])
+                    if let recognizer = previousChip.gestureRecognizers {
+                        previousChip.removeGestureRecognizer(recognizer[0])
+                        
                     }
                 }
             }
@@ -314,7 +322,7 @@ class playerContentView: UIView {
     func displayView(){
         callButton =   UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
         
-        callButton.setTitle("Call/Check", for: .normal)
+        callButton.setTitle("All In!", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
         callButton.layer.cornerRadius = 5
@@ -526,8 +534,27 @@ class playerContentView: UIView {
     
     @objc func callButtonPressed() {
         print("call pressed ")
-
         
+        for chip in blueChipArray {
+            chipsToBid.append(chip)
+        }
+        blueChipArray.removeAll()
+        for chip in redChipArray {
+            chipsToBid.append(chip)
+        }
+        redChipArray.removeAll()
+        for chip in greenChipArray {
+            chipsToBid.append(chip)
+        }
+        greenChipArray.removeAll()
+        for chip in blackChipArray {
+            chipsToBid.append(chip)
+        }
+        blackChipArray.removeAll()
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.addToPot(chips: chipsToBid)
+        }
     }
     
     @objc func foldButtonPressed() {
