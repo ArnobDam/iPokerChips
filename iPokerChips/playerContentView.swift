@@ -35,9 +35,14 @@ class playerContentView: UIView {
     var chipsToBid:[Chip] = []
     
     var currentValue: Double = 0
+    
+    var shouldHighlight = false
 
     
     var player: String?
+    
+    
+    var highlightedView:UIView!
     
     var draggapleChipBlue: Chip!
     var draggapleChipBlack: Chip!
@@ -72,10 +77,13 @@ class playerContentView: UIView {
         recognizer.view!.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
         
         if (recognizer.state == UIGestureRecognizer.State.began) {
+            highlightView()
+            shouldHighlight = true
             
         }
         
         else if (recognizer.state == UIGestureRecognizer.State.ended) {
+            shouldHighlight = false
             if (y < (self.frame.height / 2)) {
                 moveChipToPot(chip: recognizer.view as! Chip)
                 removeChipFromStack(chip:recognizer.view as! Chip)
@@ -363,7 +371,8 @@ class playerContentView: UIView {
         
 //        creating labels
         
-        let playerTitle = UILabel(frame: CGRect(x: 120, y: 10, width: 200, height: 100))
+        let playerTitle = UILabel(frame: CGRect(x: 136, y: -45, width: 150, height: 150
+        ))
         playerTitle.text = player
         playerTitle.font = UIFont (name: "Gurmukhi MN", size: 30)
         playerTitle.textColor = UIColor.white
@@ -456,9 +465,38 @@ class playerContentView: UIView {
         addGestureRecognizerToChip(chip: redChip4)
         addGestureRecognizerToChip(chip: blackChip4)
         
+        
+        
+        
+        
+        highlightedView = UIView(frame: CGRect(x: 0, y: -45, width: 414, height: 420))
+        highlightedView.backgroundColor = UIColor(displayP3Red: 255, green: 255, blue: 237, alpha: 1)
+        highlightedView.alpha = 0
+        self.addSubview(highlightedView)
+        
     }
 
 
+    func highlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+                    self.highlightedView.alpha = 0.2
+        }, completion: { (finished: Bool) in
+            self.unhighlightView()
+
+        })
+    }
+    
+    
+    func unhighlightView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.highlightedView.alpha = 0
+        }, completion: { (finished: Bool) in
+            if self.shouldHighlight {
+
+                self.highlightView()
+            }
+        })
+    }
     
     
     //test
@@ -474,6 +512,10 @@ class playerContentView: UIView {
     
     @objc func foldButtonPressed() {
         print("fold pressed")
+        
+        if let topController = UIApplication.topViewController() as? GameViewController {
+            topController.goToNextPlayer()
+        }
     }
     
     @objc func raiseButtonPressed() {

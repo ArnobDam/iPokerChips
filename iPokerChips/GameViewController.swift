@@ -80,6 +80,29 @@ class GameViewController: UIViewController {
             currentWidth += self.view.frame.width
         }
         currentPotSize = Double(0)
+        
+        
+        let potView = UIView(frame: CGRect(x: 56, y: 50, width: 200, height: 200))
+        let dashedBorder = CAShapeLayer()
+        dashedBorder.strokeColor = UIColor.black.cgColor
+        dashedBorder.lineDashPattern = [5, 10]
+        dashedBorder.lineWidth = 1.5
+        dashedBorder.fillColor = nil
+        dashedBorder.path = UIBezierPath(roundedRect: CGRect(x: 56, y: 50, width: 200, height: 150), cornerRadius: 100).cgPath
+        potView.layer.addSublayer(dashedBorder)
+        self.view.addSubview(potView)
+        
+        
+        let dashedMarker = UIView(frame: CGRect(x: 0, y: 210, width: 400, height: 10))
+        let dashes = CAShapeLayer()
+        dashes.strokeColor = UIColor.black.cgColor
+        dashes.lineDashPattern = [7, 20]
+        dashes.lineWidth = 1.5
+        dashes.fillColor = nil
+        dashes.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 210, width: 420, height: 0), cornerRadius: 1).cgPath
+        dashedMarker.layer.addSublayer(dashes)
+        self.view.addSubview(dashedMarker)
+        
 
         
         
