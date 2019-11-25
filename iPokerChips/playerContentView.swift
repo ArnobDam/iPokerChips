@@ -110,7 +110,7 @@ class playerContentView: UIView {
         
         else if (recognizer.state == UIGestureRecognizer.State.ended) {
             shouldHighlight = false
-            if (y < 560) {
+            if (y < 500) {
                 moveChipToPot(chip: chip)
                 removeChipFromStack(chip:chip)
                 chipsToBid.append(chip)
@@ -134,8 +134,6 @@ class playerContentView: UIView {
         }
         
         
-        self.bringSubviewToFront(recognizer.view!)
-
     }
 
     
@@ -433,7 +431,7 @@ class playerContentView: UIView {
     func moveChipToPot(chip:Chip) {
         
         UIView.animate(withDuration: 0.7, animations: {
-            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 250 ..< 500)), width: 40, height: 40)
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 470 ..< 530)), width: 40, height: 40)
         })
     }
     
@@ -501,7 +499,7 @@ class playerContentView: UIView {
         
         
         
-        raiseButton = UIButton(frame: CGRect(x: 300, y: 460, width: 80, height: 30))
+        raiseButton = UIButton(frame: CGRect(x: 320, y: 400, width: 80, height: 30))
         raiseButton.setTitle("Bet", for: .normal)
         raiseButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         raiseButton.addTarget(self, action: #selector(raiseButtonPressed), for: .touchUpInside)
@@ -515,7 +513,7 @@ class playerContentView: UIView {
         raiseButton.isHidden = true
         
         
-        cancelButton = UIButton(frame: CGRect(x: 40, y: 460, width: 80, height: 30))
+        cancelButton = UIButton(frame: CGRect(x: 20, y: 400, width: 80, height: 30))
         cancelButton.setTitle("Reset", for: .normal)
         cancelButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         cancelButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
