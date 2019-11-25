@@ -633,16 +633,24 @@ class playerContentView: UIView {
     @objc func allInButtonPressed() {
         print("call pressed ")
         
+        
+        var chipsToPutInPot:[Chip] = []
+        
         for i in 0...blueChipArray.count - 1 {
             
             for chip in blueChipArray[i] {
                 chipsToBid.append(chip)
+                chipsToPutInPot.append(chip)
+                addGestureRecognizerToChip(chip: chip)
+
             }
             blueChipArray[i] .removeAll()
         }
         for i in 0...redChipArray.count - 1 {
             for chip in redChipArray[i] {
                 chipsToBid.append(chip)
+                chipsToPutInPot.append(chip)
+                addGestureRecognizerToChip(chip: chip)
             }
             redChipArray[i].removeAll()
 
@@ -650,6 +658,8 @@ class playerContentView: UIView {
         for i in 0...greenChipArray.count - 1 {
             for chip in greenChipArray[i] {
                 chipsToBid.append(chip)
+                chipsToPutInPot.append(chip)
+                addGestureRecognizerToChip(chip: chip)
             }
             greenChipArray[i].removeAll()
 
@@ -658,10 +668,18 @@ class playerContentView: UIView {
         for i in 0...blackChipArray.count - 1 {
             for chip in blackChipArray[i] {
                 chipsToBid.append(chip)
+                chipsToPutInPot.append(chip)
+                addGestureRecognizerToChip(chip: chip)
+                
             }
             blackChipArray[i].removeAll()
         }
         
+        chipsToPutInPot.shuffle()
+        for chip in chipsToPutInPot {
+            chip.isInStack = false
+            moveChipToPot(chip: chip)
+        }
         
         showBidButtons()
 
