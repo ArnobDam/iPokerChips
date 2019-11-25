@@ -122,17 +122,17 @@ class GameViewController: UIViewController {
         self.view.addSubview(potView)
         
         
-        let dashedMarker = UIView(frame: CGRect(x: 0, y: 310, width: 400, height: 10))
+        let dashedMarker = UIView(frame: CGRect(x: 0, y: 280, width: 400, height: 10))
         let dashes = CAShapeLayer()
         dashes.strokeColor = UIColor.black.cgColor
         dashes.lineDashPattern = [7, 20]
         dashes.lineWidth = 1.5
         dashes.fillColor = nil
-        dashes.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 310, width: 420, height: 0), cornerRadius: 1).cgPath
+        dashes.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 280, width: 420, height: 0), cornerRadius: 1).cgPath
         dashedMarker.layer.addSublayer(dashes)
         self.view.addSubview(dashedMarker)
         
-        
+        self.view.bringSubviewToFront(potLabel)
         
         // Do any additional setup after loading the view.
     }

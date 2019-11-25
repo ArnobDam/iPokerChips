@@ -27,10 +27,31 @@ extension UIApplication {
 
 
 class playerContentView: UIView {
-    var redChipArray: [Chip] = []
-    var blueChipArray: [Chip] = []
-    var blackChipArray: [Chip] = []
-    var greenChipArray: [Chip] = []
+    var redChipArray1: [Chip] = []
+    var redChipArray2: [Chip] = []
+    var redChipArray3: [Chip] = []
+    
+    
+    var blueChipArray1: [Chip] = []
+    var blueChipArray2: [Chip] = []
+    var blueChipArray3: [Chip] = []
+    
+    
+    
+    var greenChipArray1: [Chip] = []
+    var greenChipArray2: [Chip] = []
+    var greenChipArray3: [Chip] = []
+    
+    
+    
+    var blackChipArray1: [Chip] = []
+    var blackChipArray2: [Chip] = []
+    var blackChipArray3: [Chip] = []
+    
+    var redChipArray: [[Chip]] = []
+    var blueChipArray: [[Chip]] = []
+    var blackChipArray: [[Chip]] = []
+    var greenChipArray: [[Chip]] = []
     
     var chipsToBid:[Chip] = []
     
@@ -55,6 +76,8 @@ class playerContentView: UIView {
     var newCoord: CGPoint = CGPoint(x:0, y:0)
     var firstCoord: CGPoint = CGPoint(x: 0, y: 0)
     
+    
+    
      init(frame: CGRect, name: String) {
         super.init(frame: frame)
         player = name
@@ -70,11 +93,14 @@ class playerContentView: UIView {
         if (recognizer.view == nil) {
             return
         }
+        
+        let chip = recognizer.view as! Chip
+
 
         self.newCoord = recognizer.location(in: self)
-        let x = self.newCoord.x - (recognizer.view?.frame.width ?? 0) / 2
-        let y = self.newCoord.y - (recognizer.view?.frame.height ?? 0) / 2
-        recognizer.view!.frame = CGRect(x: x, y: y, width: draggapleChipBlack.frame.width, height: draggapleChipBlack.frame.height)
+        let x = self.newCoord.x - chip.frame.width / 2
+        let y = self.newCoord.y - chip.frame.height / 2
+        chip.frame = CGRect(x: x, y: y, width: chip.frame.width, height: chip.frame.height)
         
         if (recognizer.state == UIGestureRecognizer.State.began) {
             highlightView()
@@ -84,27 +110,24 @@ class playerContentView: UIView {
         
         else if (recognizer.state == UIGestureRecognizer.State.ended) {
             shouldHighlight = false
-            if (y < (self.frame.height / 2)) {
-                moveChipToPot(chip: recognizer.view as! Chip)
-                removeChipFromStack(chip:recognizer.view as! Chip)
-                chipsToBid.append(recognizer.view as! Chip)
+            if (y < 560) {
+                moveChipToPot(chip: chip)
+                removeChipFromStack(chip:chip)
+                chipsToBid.append(chip)
                 showBidButtons()
-                
-                
-                //blackChipArray.removeLast()
-                
-                
-                
-               /* if (blackChipArray.count > 0) {
-                    draggapleChipBlack = blackChipArray[blackChipArray.count-1]
-                    addRecognizerToChip()
-                }*/
                
             }
             else {
-                addChipToStack(chip: recognizer.view as! Chip)
-                if let index = chipsToBid.firstIndex(of: recognizer.view  as! Chip) {
+                if chip.isInStack {
+                        moveChipTo(chip: chip, frame: chip.frameInStack)
+                }
+                else {
+                
+                
+                addChipToStack(chip: chip)
+                if let index = chipsToBid.firstIndex(of: chip) {
                     chipsToBid.remove(at: index)
+                }
                 }
                 
             }
@@ -118,29 +141,54 @@ class playerContentView: UIView {
     
     
     func addChipToStack (chip:Chip) {
+        
+        chip.isInStack = true
         if chip.selfchipType == Chip.chipType.blue{
             
-            if !blueChipArray.contains(chip) {
 
-                blueChipArray.append(chip)
+
+            
+            var xPos = 0
+            var yPos = 0
+            
+            if blueChipArray[0].count < 10 {
+                blueChipArray[0].append(chip)
+               xPos =  10
+                yPos = 780 - blueChipArray[0].count*20
                 
-                if blueChipArray.count > 1 {
-                    let previousChip = blueChipArray[blueChipArray.count - 2]
-                    if let recognizer = previousChip.gestureRecognizers {
-                        previousChip.removeGestureRecognizer(recognizer[0])
-
-                    }
-                    
-                    
-                    
-                    
+                if blueChipArray[0].count > 1{
+                    let previousChip = blueChipArray[0][blueChipArray[0].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
                 }
+                
             }
-        
-            let xpos = Double(blueChipArray.count/10).rounded(.down)
-            
-            
-            let frame = CGRect(x: CGFloat(10 + xpos*30), y: 760-CGFloat(20*(Float(blueChipArray.count).truncatingRemainder(dividingBy: 10)-1)), width: chipWidth, height: chipHeight)
+            else if blueChipArray[1].count < 10 {
+                blueChipArray[1].append(chip)
+
+               xPos = 40
+                yPos = 780 - blueChipArray[1].count*20
+                
+                if blueChipArray[1].count > 1{
+                    let previousChip = blueChipArray[1][blueChipArray[1].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+
+            }
+            else {
+                blueChipArray[2].append(chip)
+
+                xPos = -30
+                yPos = 780 - blueChipArray[2].count*20
+                
+                
+                if blueChipArray[2].count > 1{
+                    let previousChip = blueChipArray[2][blueChipArray[2].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+
+            }
+           // let xpos = Double((blueChipArray.count - 1)/10).rounded(.down)
+            let frame = CGRect(x: CGFloat(xPos), y: CGFloat(yPos), width: chipWidth, height: chipHeight)
             moveChipTo(chip: chip, frame: frame)
 
             }
@@ -149,43 +197,104 @@ class playerContentView: UIView {
         
         if chip.selfchipType == Chip.chipType.red{
             
-            if !redChipArray.contains(chip) {
-                redChipArray.append(chip)
+
+        
+            var xPos = 0
+            var yPos = 0
+            
+            if redChipArray[0].count < 10 {
+                redChipArray[0].append(chip)
+                xPos =  120
+                yPos = 780 - redChipArray[0].count*20
                 
-                if redChipArray.count > 1 {
-                    let previousChip = redChipArray[redChipArray.count - 2]
-                    if let recognizer = previousChip.gestureRecognizers {
-                        previousChip.removeGestureRecognizer(recognizer[0])
-                        
-                    }
+                if redChipArray[0].count > 1{
+                    let previousChip = redChipArray[0][redChipArray[0].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
                 }
+                
+            }
+            else if redChipArray[1].count < 10 {
+                redChipArray[1].append(chip)
+                xPos = 150
+                yPos = 780 - redChipArray[1].count*20
+                
+                
+                if redChipArray[1].count > 1{
+                    let previousChip = redChipArray[1][redChipArray[1].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
+            }
+            else {
+                
+                redChipArray[2].append(chip)
+
+                xPos = 90
+                yPos = 780 - redChipArray[2].count*20
+                
+                
+                if redChipArray[2].count > 1{
+                    let previousChip = redChipArray[2][redChipArray[2].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
             }
             
-            let xpos = Double(redChipArray.count/10).rounded(.down)
-
-            let frame = CGRect(x: CGFloat(120 + xpos*30), y: 760-CGFloat(20*(Float(redChipArray.count).truncatingRemainder(dividingBy: 10)-1)), width: chipWidth, height: chipHeight)
+            // let xpos = Double((blueChipArray.count - 1)/10).rounded(.down)
+            
+            let frame = CGRect(x: CGFloat(xPos), y: CGFloat(yPos), width: chipWidth, height: chipHeight)
             moveChipTo(chip: chip, frame: frame)
             
 
         }
         
-        
+
         if chip.selfchipType == Chip.chipType.black{
             
-            if !blackChipArray.contains(chip) {
-                blackChipArray.append(chip)
-                if blackChipArray.count > 1 {
-                    let previousChip = blackChipArray[blackChipArray.count - 2]
-                    if let recognizer = previousChip.gestureRecognizers {
-                        previousChip.removeGestureRecognizer(recognizer[0])
-                        
-                    }
+
+            var xPos = 0
+            var yPos = 0
+            
+            if blackChipArray[0].count < 10 {
+                blackChipArray[0].append(chip)
+                xPos =  220
+                yPos = 780 - blackChipArray[0].count*20
+                
+                
+                if blackChipArray[0].count > 1{
+                    let previousChip = blackChipArray[0][blackChipArray[0].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
                 }
+                
+            }
+            else if blackChipArray[1].count < 10 {
+                blackChipArray[1].append(chip)
+                xPos = 250
+                yPos = 780 - blackChipArray[1].count*20
+                
+                if blackChipArray[1].count > 1{
+                    let previousChip = blackChipArray[1][blackChipArray[1].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
+            }
+            else {
+                
+                blackChipArray[2].append(chip)
+                
+                xPos = 190
+                yPos = 780 - blackChipArray[2].count*20
+                
+                if blackChipArray[2].count > 1{
+                    let previousChip = blackChipArray[2][blackChipArray[2].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
             }
             
-            let xpos = Double(blackChipArray.count/10).rounded(.down)
-
-            let frame = CGRect(x: CGFloat(320 + xpos*30), y: 760-CGFloat(20*(Float(blackChipArray.count).truncatingRemainder(dividingBy: 10)-1)), width: chipWidth, height: chipHeight)
+            // let xpos = Double((blueChipArray.count - 1)/10).rounded(.down)
+            
+            let frame = CGRect(x: CGFloat(xPos), y: CGFloat(yPos), width: chipWidth, height: chipHeight)
             moveChipTo(chip: chip, frame: frame)
 
         }
@@ -193,27 +302,55 @@ class playerContentView: UIView {
         
         if chip.selfchipType == Chip.chipType.green{
             
-            if !greenChipArray.contains(chip) {
-                greenChipArray.append(chip)
+            var xPos = 0
+            var yPos = 0
+            
+            if greenChipArray[0].count < 10 {
+                greenChipArray[0].append(chip)
+                xPos =  320
+                yPos = 780 - greenChipArray[0].count*20
                 
-                if greenChipArray.count > 1 {
-                    let previousChip = greenChipArray[greenChipArray.count - 2]
-                    if let recognizer = previousChip.gestureRecognizers {
-                        previousChip.removeGestureRecognizer(recognizer[0])
-                        
-                    }
+                
+                if greenChipArray[0].count > 1{
+                    let previousChip = greenChipArray[0][greenChipArray[0].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
                 }
+                
+            }
+            else if greenChipArray[1].count < 10 {
+                greenChipArray[1].append(chip)
+                xPos = 350
+                yPos = 780 - greenChipArray[1].count*20
+
+                if greenChipArray[1].count > 1{
+                    let previousChip = greenChipArray[1][greenChipArray[1].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
+            }
+            else {
+                
+                greenChipArray[2].append(chip)
+                
+                xPos = 290
+                yPos = 780 - greenChipArray[2].count*20
+                
+                if greenChipArray[2].count > 1{
+                    let previousChip = greenChipArray[2][greenChipArray[2].count - 2]
+                    previousChip.gestureRecognizers?.forEach(previousChip.removeGestureRecognizer)
+                }
+                
             }
             
-            let xpos = Double(greenChipArray.count/10).rounded(.down)
-
+            // let xpos = Double((blueChipArray.count - 1)/10).rounded(.down)
             
-            let frame = CGRect(x: CGFloat(220 + xpos*30), y: 760-CGFloat(20*(Float(greenChipArray.count).truncatingRemainder(dividingBy: 10)-1)), width: chipWidth, height: chipHeight)
+            let frame = CGRect(x: CGFloat(xPos), y: CGFloat(yPos), width: chipWidth, height: chipHeight)
             moveChipTo(chip: chip, frame: frame)
             
         }
         
-        
+        chip.frameInStack = chip.frame
+        self.bringSubviewToFront(chip)
         
     }
     
@@ -235,49 +372,59 @@ class playerContentView: UIView {
     
     
     func removeChipFromStack (chip:Chip){
+        chip.isInStack = false
+        
         if chip.selfchipType == Chip.chipType.blue{
-            if let index = blueChipArray.firstIndex(of: chip) {
-                print(index)
-                blueChipArray.remove(at: index)
-                if blueChipArray.count > 0 {
-                    addGestureRecognizerToChip(chip: blueChipArray[blueChipArray.count - 1])
+            
+            for i in 0...blueChipArray.count-1 {
+            if let index = blueChipArray[i].firstIndex(of: chip) {
+                blueChipArray[i].remove(at: index)
+                if blueChipArray[i].count > 0 {
+                    addGestureRecognizerToChip(chip: blueChipArray[i][blueChipArray[i].count - 1])
                 }
             }
+        }
         }
         
         
         
         if chip.selfchipType == Chip.chipType.red{
-            if let index = redChipArray.firstIndex(of: chip) {
-                print(index)
-                redChipArray.remove(at: index)
-                if redChipArray.count > 0 {
-                    addGestureRecognizerToChip(chip: redChipArray[redChipArray.count - 1])
+            for i in 0...redChipArray.count-1 {
+
+            if let index = redChipArray[i].firstIndex(of: chip) {
+                redChipArray[i].remove(at: index)
+                if redChipArray[i].count > 0 {
+                    addGestureRecognizerToChip(chip: redChipArray[i][redChipArray[i].count - 1])
                 }
             }
+        }
         }
         
         
         if chip.selfchipType == Chip.chipType.black{
-            if let index = blackChipArray.firstIndex(of: chip) {
-                print(index)
-                blackChipArray.remove(at: index)
-                if blackChipArray.count > 0 {
-                    addGestureRecognizerToChip(chip: blackChipArray[blackChipArray.count - 1])
+            for i in 0...blackChipArray.count-1 {
+
+            if let index = blackChipArray[i].firstIndex(of: chip) {
+                blackChipArray[i].remove(at: index)
+                if blackChipArray[i].count > 0 {
+                    addGestureRecognizerToChip(chip: blackChipArray[i][blackChipArray[i].count - 1])
                 }
             }
         }
-        
+        }
         
         
         if chip.selfchipType == Chip.chipType.green{
-            if let index = greenChipArray.firstIndex(of: chip) {
-                print(index)
-                greenChipArray.remove(at: index)
-                if greenChipArray.count > 0 {
-                    addGestureRecognizerToChip(chip: greenChipArray[greenChipArray.count - 1])
+            
+            for i in 0...greenChipArray.count-1 {
+
+            if let index = greenChipArray[i].firstIndex(of: chip) {
+                greenChipArray[i].remove(at: index)
+                if greenChipArray[i].count > 0 {
+                    addGestureRecognizerToChip(chip: greenChipArray[i][greenChipArray[i].count - 1])
                 }
             }
+        }
         }
         
     }
@@ -286,7 +433,7 @@ class playerContentView: UIView {
     func moveChipToPot(chip:Chip) {
         
         UIView.animate(withDuration: 0.7, animations: {
-            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 250 ..< 350)), width: 40, height: 40)
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 250 ..< 500)), width: 40, height: 40)
         })
     }
     
@@ -307,13 +454,14 @@ class playerContentView: UIView {
     var callButton:UIButton!
     var foldButton:UIButton!
     var cancelButton:UIButton!
-    
+    var allInButton:UIButton!
+
     
     
     func displayView(){
-        callButton =   UIButton(frame: CGRect(x:240, y: 510, width: 150, height: 50))
+        callButton =   UIButton(frame: CGRect(x:30, y: 525, width: 100, height: 50))
         
-        callButton.setTitle("All In!", for: .normal)
+        callButton.setTitle("Call", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
         callButton.layer.cornerRadius = 5
@@ -323,7 +471,23 @@ class playerContentView: UIView {
         callButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(callButton)
         
-        foldButton = UIButton(frame: CGRect(x: 30, y: 510, width: 150, height: 50))
+        
+        allInButton =   UIButton(frame: CGRect(x:290, y: 525, width: 100, height: 50))
+        
+        allInButton.setTitle("All In!", for: .normal)
+        allInButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
+        allInButton.addTarget(self, action: #selector(allInButtonPressed), for: .touchUpInside)
+        allInButton.layer.cornerRadius = 5
+        allInButton.layer.borderWidth = 1
+        allInButton.layer.borderColor = UIColor.white.cgColor
+        allInButton.backgroundColor = UIColor.blue
+        allInButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.addSubview(allInButton)
+        
+        
+        
+        
+        foldButton = UIButton(frame: CGRect(x: 160, y: 525, width: 100, height: 50))
         foldButton.setTitle("Fold", for: .normal)
         foldButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         foldButton.addTarget(self, action: #selector(foldButtonPressed), for: .touchUpInside)
@@ -337,25 +501,25 @@ class playerContentView: UIView {
         
         
         
-        raiseButton = UIButton(frame: CGRect(x: 30, y: 380, width: 100, height: 50))
-        raiseButton.setTitle("Raise", for: .normal)
+        raiseButton = UIButton(frame: CGRect(x: 300, y: 460, width: 80, height: 30))
+        raiseButton.setTitle("Bet", for: .normal)
         raiseButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         raiseButton.addTarget(self, action: #selector(raiseButtonPressed), for: .touchUpInside)
-        raiseButton.layer.cornerRadius = 10
+        raiseButton.layer.cornerRadius = 5
         raiseButton.layer.borderWidth = 1
         raiseButton.layer.borderColor = UIColor.white.cgColor
         raiseButton.setTitleColor(.white, for: .normal)
         raiseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        raiseButton.backgroundColor  = UIColor.orange
+        raiseButton.backgroundColor  = UIColor.black
         self.addSubview(raiseButton)
         raiseButton.isHidden = true
         
         
-        cancelButton = UIButton(frame: CGRect(x: 240, y: 380, width: 100, height: 50))
+        cancelButton = UIButton(frame: CGRect(x: 40, y: 460, width: 80, height: 30))
         cancelButton.setTitle("Reset", for: .normal)
         cancelButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         cancelButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
-        cancelButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 5
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = UIColor.white.cgColor
         //cancel.titleLabel?.textColor = UIColor.red
@@ -373,97 +537,47 @@ class playerContentView: UIView {
         playerTitle.textAlignment = .center
         self.addSubview(playerTitle)
         
-        let dragToRaise = UILabel(frame: CGRect(x: 130, y: 350, width: 200, height: 100))
+        let dragToRaise = UILabel(frame: CGRect(x: 130, y: 300, width: 200, height: 100))
         dragToRaise.text = "Drag chip to raise!"
         dragToRaise.font = UIFont(name: "Gurmukhi MN", size: 20)
         dragToRaise.textColor = UIColor.white
         dragToRaise.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(dragToRaise)
         
+        redChipArray = [redChipArray1, redChipArray2, redChipArray3]
+        blueChipArray = [blueChipArray1, blueChipArray2, blueChipArray3]
+        greenChipArray = [greenChipArray1, greenChipArray2, greenChipArray3]
+        blackChipArray = [blackChipArray1, blackChipArray2, blackChipArray3]
 
         
-        
-        let blueChip = Chip(frame: CGRect(x: 10, y: 760, width: chipWidth, height: chipHeight), chipType: .blue)
-        self.addSubview(blueChip)
-        let blueChip2 = Chip(frame: CGRect(x: 10, y: 740, width: chipWidth, height: chipHeight), chipType: .blue)
-        self.addSubview(blueChip2)
-        let blueChip3 = Chip(frame: CGRect(x: 10, y: 720, width: chipWidth, height: chipHeight), chipType: .blue)
-        self.addSubview(blueChip3)
-        let blueChip4 = Chip(frame: CGRect(x: 10, y: 700, width: chipWidth, height: chipHeight), chipType: .blue)
-        self.addSubview(blueChip4)
-        
-        draggapleChipBlue = blueChip4
-        
-        
-        blueChipArray.append(blueChip)
-        blueChipArray.append(blueChip2)
-        blueChipArray.append(blueChip3)
-        blueChipArray.append(blueChip4)
-        
-        
-        let redChip = Chip(frame: CGRect(x: 120, y: 760, width: chipWidth, height: chipHeight), chipType: .red)
-        self.addSubview(redChip)
-        let redChip2 = Chip(frame: CGRect(x: 120, y: 740, width: chipWidth, height: chipHeight), chipType: .red)
-        self.addSubview(redChip2)
-        
-        let redChip3 = Chip(frame: CGRect(x: 120, y: 720, width: chipWidth, height: chipHeight), chipType: .red)
-        self.addSubview(redChip3)
-        
-        let redChip4 = Chip(frame: CGRect(x: 120, y: 700, width: chipWidth, height: chipHeight), chipType: .red)
-        self.addSubview(redChip4)
-        
-        draggableChipRed = redChip4
-        
-        redChipArray.append(redChip)
-        redChipArray.append(redChip2)
-        redChipArray.append(redChip3)
-        redChipArray.append(redChip4)
-        
-        
-        let blackChip = Chip(frame: CGRect(x: 320, y: 760, width: chipWidth, height: chipHeight), chipType: .black)
-        self.addSubview(blackChip)
-        let blackChip2 = Chip(frame: CGRect(x: 320, y: 740, width: chipWidth, height: chipHeight), chipType: .black)
-        self.addSubview(blackChip2)
-        let blackChip3 = Chip(frame: CGRect(x: 320, y: 720, width: chipWidth, height: chipHeight), chipType: .black)
-        self.addSubview(blackChip3)
-        let blackChip4 = Chip(frame: CGRect(x: 320, y: 700, width: chipWidth, height: chipHeight), chipType: .black)
-        self.addSubview(blackChip4)
-        
-        draggapleChipBlack = blackChip4
-        
-        blackChipArray.append(blackChip)
-        blackChipArray.append(blackChip2)
-        blackChipArray.append(blackChip3)
-        blackChipArray.append(blackChip4)
-        
-        
-        let greenChip = Chip(frame: CGRect(x: 220, y: 760, width: chipWidth, height: chipHeight), chipType: .green)
-        self.addSubview(greenChip)
-        let greenChip2 = Chip(frame: CGRect(x: 220, y: 740, width: chipWidth, height: chipHeight), chipType: .green)
-        self.addSubview(greenChip2)
-        let greenChip3 = Chip(frame: CGRect(x: 220, y: 720, width: chipWidth, height: chipHeight), chipType: .green)
-        self.addSubview(greenChip3)
-        let greenChip4 = Chip(frame: CGRect(x: 220, y: 700, width: chipWidth, height: chipHeight), chipType: .green)
-        self.addSubview(greenChip4)
-        
-        draggableChipGreen = greenChip4
-        
-        greenChipArray.append(greenChip)
-        greenChipArray.append(greenChip2)
-        greenChipArray.append(greenChip3)
-        greenChipArray.append(greenChip4)
-        
-        
-        addGestureRecognizerToChip(chip: blueChip4)
-        addGestureRecognizerToChip(chip: greenChip4)
-        addGestureRecognizerToChip(chip: redChip4)
-        addGestureRecognizerToChip(chip: blackChip4)
+        for i in 1...15 {
+            let blueChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .blue)
+            addGestureRecognizerToChip(chip: blueChip)
+            self.addSubview(blueChip)
+            addChipToStack(chip: blueChip)
+            
+            let blackChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .black)
+            addGestureRecognizerToChip(chip: blackChip)
+            self.addSubview(blackChip)
+            addChipToStack(chip: blackChip)
+            
+            
+            let greenChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .green)
+            addGestureRecognizerToChip(chip: greenChip)
+            self.addSubview(greenChip)
+            addChipToStack(chip: greenChip)
+            
+            
+            let redChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .red)
+            addGestureRecognizerToChip(chip: redChip)
+            self.addSubview(redChip)
+            addChipToStack(chip: redChip)
+        }
         
         
         
         
-        
-        highlightedView = UIView(frame: CGRect(x: 0, y: -45, width: 414, height: 520))
+        highlightedView = UIView(frame: CGRect(x: 0, y: -45, width: 414, height: 560))
         highlightedView.backgroundColor = UIColor(displayP3Red: 255, green: 255, blue: 237, alpha: 1)
         highlightedView.alpha = 0
         self.addSubview(highlightedView)
@@ -509,28 +623,42 @@ class playerContentView: UIView {
         })
     }
     
-
-    
     @objc func callButtonPressed() {
+    }
+
+    @objc func allInButtonPressed() {
         print("call pressed ")
         
-        for chip in blueChipArray {
-            chipsToBid.append(chip)
+        for i in 0...blueChipArray.count - 1 {
+            
+            for chip in blueChipArray[i] {
+                chipsToBid.append(chip)
+            }
+            blueChipArray[i] .removeAll()
         }
-        blueChipArray.removeAll()
-        for chip in redChipArray {
-            chipsToBid.append(chip)
+        for i in 0...redChipArray.count - 1 {
+            for chip in redChipArray[i] {
+                chipsToBid.append(chip)
+            }
+            redChipArray[i].removeAll()
+
         }
-        redChipArray.removeAll()
-        for chip in greenChipArray {
-            chipsToBid.append(chip)
+        for i in 0...greenChipArray.count - 1 {
+            for chip in greenChipArray[i] {
+                chipsToBid.append(chip)
+            }
+            greenChipArray[i].removeAll()
+
         }
-        greenChipArray.removeAll()
-        for chip in blackChipArray {
-            chipsToBid.append(chip)
+
+        for i in 0...blackChipArray.count - 1 {
+            for chip in blackChipArray[i] {
+                chipsToBid.append(chip)
+            }
+            blackChipArray[i].removeAll()
         }
-        blackChipArray.removeAll()
         
+    
 
         
         if let topController = UIApplication.topViewController() as? GameViewController {
