@@ -677,6 +677,7 @@ class playerContentView: UIView {
         
         chipsToPutInPot.shuffle()
         for chip in chipsToPutInPot {
+            self.bringSubviewToFront(chip)
             chip.isInStack = false
             moveChipToPot(chip: chip)
         }
