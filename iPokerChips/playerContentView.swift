@@ -431,7 +431,13 @@ class playerContentView: UIView {
     func moveChipToPot(chip:Chip) {
         
         UIView.animate(withDuration: 0.7, animations: {
-            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 80 ..< Int(UIScreen.main.bounds.width/2) + 20 )), y: CGFloat(Int.random(in: 470 ..< 530)), width: 40, height: 40)
+            
+            let r = Double.random(in: 0..<75)
+            let theta = Double.random(in: -180..<0)
+            
+            let y = r*sin(theta * Double.pi / 180)
+            let x = r*cos(theta * Double.pi / 180)
+            chip.frame = CGRect(x: CGFloat(Double(UIScreen.main.bounds.width/2) - 20 + x ), y:CGFloat( 480 + y), width: 40, height: 40)
         })
     }
     
@@ -656,13 +662,15 @@ class playerContentView: UIView {
             blackChipArray[i].removeAll()
         }
         
-    
-
         
+        showBidButtons()
+
+
+        /*
         if let topController = UIApplication.topViewController() as? GameViewController {
             topController.addToPot(chips: chipsToBid)
         }
-
+*/
 
         
     }
