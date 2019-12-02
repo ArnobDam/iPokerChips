@@ -121,6 +121,9 @@ class playerContentView: UIView {
                 removeChipFromStack(chip:chip)
                 chipsToBid.append(chip)
                 showBidButtons()
+                if let topController = UIApplication.topViewController() as? GameViewController {
+                    topController.addToPot(chips: self.chipsToBid)
+                }
                
             }
             else {
