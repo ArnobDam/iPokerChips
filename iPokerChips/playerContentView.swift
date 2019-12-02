@@ -137,18 +137,25 @@ class playerContentView: UIView {
                         moveChipTo(chip: chip, frame: chip.frameInStack)
                 }
                 else {
-                
+                    addChipToStack(chip: chip)
+                    if let index = chipsToBid.firstIndex(of: chip) {
+                        chipsToBid.remove(at: index)
+                    }
 
                     currentBid -= chipValues[chip.selfchipType]!
                     currentHandSize! += chipValues[chip.selfchipType]!
-                    currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
-                addChipToStack(chip: chip)
-                if let index = chipsToBid.firstIndex(of: chip) {
-                    chipsToBid.remove(at: index)
-                }
+                    
                     if chipsToBid.isEmpty   {
                         hideBidButtons()
+                        currentBidLabel.text = "$ 0.0"
+
                     }
+                    else {
+                         currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
+                    }
+                    
+
+
                 }
                 
             }
@@ -447,8 +454,9 @@ class playerContentView: UIView {
             }
         }
         }
+    }
         
-//    commit
+
     
     func moveChipToPot(chip:Chip) {
         
