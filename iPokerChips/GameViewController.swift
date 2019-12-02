@@ -27,7 +27,6 @@ class GameViewController: UIViewController {
     var currentPot:[Chip] = []
     
     var blueChipArray:[Chip] = []
-     //commit
     
     let formatter = NumberFormatter()
 

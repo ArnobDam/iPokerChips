@@ -138,11 +138,17 @@ class playerContentView: UIView {
                 }
                 else {
                 
-                
+
+                    currentBid -= chipValues[chip.selfchipType]!
+                    currentHandSize! += chipValues[chip.selfchipType]!
+                    currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
                 addChipToStack(chip: chip)
                 if let index = chipsToBid.firstIndex(of: chip) {
                     chipsToBid.remove(at: index)
                 }
+                    if chipsToBid.isEmpty   {
+                        hideBidButtons()
+                    }
                 }
                 
             }
@@ -446,6 +452,10 @@ class playerContentView: UIView {
 
     
     func moveChipToPot(chip:Chip) {
+        
+        
+        currentHandSize! -= chipValues[chip.selfchipType]!
+
         
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
