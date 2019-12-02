@@ -93,6 +93,17 @@ class GameViewController: UIViewController {
         if currentPlayer == playerNames.count {
             currentPlayer = 0
         }
+        while playerContentViews[currentPlayer].folded {
+            if currentPlayer == playerNames.count-1 {
+                currentPlayer = 0
+            }
+            else {
+            currentPlayer += 1
+            }
+        }
+        
+
+        
         let frame = playerContentViews[currentPlayer].frame
         contentScroll.scrollRectToVisible(frame, animated: true)
         

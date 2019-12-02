@@ -73,6 +73,8 @@ class playerContentView: UIView {
     
     var player: String?
     
+    var folded = false
+    
     
     var highlightedView:UIView!
     
@@ -867,6 +869,8 @@ class playerContentView: UIView {
     }
     
     @objc func foldButtonPressed() {
+        
+        folded = true
         for chip in chipsToBid{
             addChipToStack(chip: chip)
         }
@@ -884,6 +888,8 @@ class playerContentView: UIView {
         for chip in chipsToBid {
             currentHandSize! -= chipValues[chip.selfchipType]!
         }
+        currentBidLabel.text = "$ 0"
+        currentBid = 0
         
         
         hideBidButtons()
