@@ -442,8 +442,7 @@ class playerContentView: UIView {
         }
         }
         
-    }
-
+    
     
     func moveChipToPot(chip:Chip) {
         
