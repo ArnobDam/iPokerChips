@@ -25,7 +25,7 @@ public class Chip: UIImageView {
         case black = "BlackChip"
 
     }
-//    commit
+
     
     init(frame: CGRect, chipType:chipType) {
         super.init(frame: frame)
