@@ -531,7 +531,6 @@ class playerContentView: UIView {
     }
     
 
-    
     @objc func callButtonPressed() {
         print("call pressed ")
         
