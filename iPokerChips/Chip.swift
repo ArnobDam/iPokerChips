@@ -26,7 +26,6 @@ public class Chip: UIImageView {
 
     }
     
-
     
     init(frame: CGRect, chipType:chipType) {
         super.init(frame: frame)
