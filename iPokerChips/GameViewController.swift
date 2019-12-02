@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     var playerContentViews: [playerContentView] = []
     var currentPlayer = 0
     var currentPotSize:Double!
+    var currentBid: Double!
     var chipValues:[Chip.chipType:Double] = [:]
     
     var startingPlayer:Int = 0
@@ -29,7 +30,6 @@ class GameViewController: UIViewController {
      //commit
     
     let formatter = NumberFormatter()
-
 
     
     @IBOutlet weak var potLabel: UILabel!
@@ -128,6 +128,7 @@ class GameViewController: UIViewController {
             currentWidth += self.view.frame.width
         }
         currentPotSize = Double(0)
+        currentBid = Double (0)
         
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
@@ -180,6 +181,15 @@ class GameViewController: UIViewController {
     }
     
     
+//    func setCurrentBid(chips:[Chip]) {
+//
+//        for chip in chips {
+//
+//            print(currentBid)
+//        }
+//
+//
+//    }
     
     func addToPot(chips:[Chip]) {
 
