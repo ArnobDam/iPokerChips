@@ -30,6 +30,9 @@ class playerContentView: UIView {
     
     
     var handSize: Double?
+    var currentHandSize: Double?
+    var chipValues:[Chip.chipType:Double] = [:]
+
 
     var redChipArray1: [Chip] = []
     var redChipArray2: [Chip] = []
@@ -82,10 +85,11 @@ class playerContentView: UIView {
     
     
     
-    init(frame: CGRect, name: String, startingHandsize:Double) {
+    init(frame: CGRect, name: String, startingHandsize:Double,  loadedChipVals:[Chip.chipType:Double] ) {
         super.init(frame: frame)
         player = name
         handSize = startingHandsize
+        chipValues = loadedChipVals
         displayView()
        // addRecognizerToChip()
     }
@@ -449,6 +453,10 @@ class playerContentView: UIView {
     
     func addChipsFromPot(chips:[Chip]) {
         
+        for chip in chips {
+            currentHandSize! += chipValues[chip.selfchipType]!
+        }
+        print(currentHandSize)
         for chip in chips{
             
             self.addSubview(chip)
@@ -471,7 +479,7 @@ class playerContentView: UIView {
     func displayView(){
         callButton =   UIButton(frame: CGRect(x:30, y: 525, width: 100, height: 50))
         
-        callButton.setTitle("Call", for: .normal)
+        callButton.setTitle("Reset Chips", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
         callButton.layer.cornerRadius = 5
@@ -592,7 +600,7 @@ class playerContentView: UIView {
         }
         
         
-
+        currentHandSize = handSize
         
         
         
@@ -665,6 +673,76 @@ class playerContentView: UIView {
     }
     
     @objc func callButtonPressed() {
+        for i in 0...blueChipArray.count - 1 {
+            
+            for chip in blueChipArray[i] {
+              chip.removeFromSuperview()
+                
+            }
+            blueChipArray[i] .removeAll()
+        }
+        for i in 0...redChipArray.count - 1 {
+            for chip in redChipArray[i] {
+                chip.removeFromSuperview()
+
+            }
+            redChipArray[i].removeAll()
+            
+        }
+        for i in 0...greenChipArray.count - 1 {
+            for chip in greenChipArray[i] {
+                chip.removeFromSuperview()
+
+            }
+            greenChipArray[i].removeAll()
+            
+        }
+        
+        for i in 0...blackChipArray.count - 1 {
+            for chip in blackChipArray[i] {
+                chip.removeFromSuperview()
+
+                
+            }
+            blackChipArray[i].removeAll()
+        }
+ 
+   
+        
+        var chipNums:[Chip.chipType:Int]  = [:]
+        if handSize == Double(10) {
+            print("its 10")
+            chipNums = numberOfChips10(currentDollarHandSize: currentHandSize!)
+        }
+        else if handSize == 50 {
+            chipNums = numberOfChips50(currentDollarHandSize: currentHandSize!)
+            
+        }
+        else if handSize == 100 {
+            chipNums = numberOfChips100(currentDollarHandSize: currentHandSize!)
+            
+        }
+        else if handSize == 500 {
+            chipNums = numberOfChips500(currentDollarHandSize: currentHandSize!)
+            
+        }
+        else if handSize == 1000 {
+            chipNums = numberOfChips1000(currentDollarHandSize: currentHandSize!)
+            
+        }
+        print(handSize)
+        
+        for (chipType,num) in chipNums {
+            for i in 1...num {
+                let chip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: chipType)
+                addGestureRecognizerToChip(chip: chip)
+                self.addSubview(chip)
+                addChipToStack(chip: chip)
+            }
+        }
+        
+        
+        
     }
 
     @objc func allInButtonPressed() {
@@ -745,6 +823,11 @@ class playerContentView: UIView {
     }
     
     @objc func raiseButtonPressed() {
+        
+        for chip in chipsToBid {
+            currentHandSize! -= chipValues[chip.selfchipType]!
+        }
+        
         
         hideBidButtons()
         

@@ -106,7 +106,7 @@ class GameViewController: UIViewController {
         
         var currentWidth:CGFloat = 0
         for name in playerNames {
-            let playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name, startingHandsize:handSize!)
+            let playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name, startingHandsize:handSize!, loadedChipVals: chipValues)
 
             playerContentViews.append(playerContent)
             contentScroll.addSubview(playerContent)
