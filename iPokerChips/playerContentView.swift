@@ -627,7 +627,6 @@ class playerContentView: UIView {
             }
         })
     }
-    
 
     @objc func callButtonPressed() {
     }
