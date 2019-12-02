@@ -13,6 +13,11 @@ public class Chip: UIImageView {
     
     var selfchipType:chipType!
     
+    var isInStack:Bool!
+    
+    var frameInStack: CGRect!
+
+    
     enum chipType: String {
         case blue = "BlueChip"
         case red = "RedChip"

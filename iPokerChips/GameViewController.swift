@@ -122,17 +122,33 @@ class GameViewController: UIViewController {
         self.view.addSubview(potView)
         
         
-        let dashedMarker = UIView(frame: CGRect(x: 0, y: 210, width: 400, height: 10))
+        let dashedMarker = UIView(frame: CGRect(x: 0, y: 280, width: 400, height: 10))
         let dashes = CAShapeLayer()
         dashes.strokeColor = UIColor.black.cgColor
         dashes.lineDashPattern = [7, 20]
         dashes.lineWidth = 1.5
         dashes.fillColor = nil
-        dashes.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 210, width: 420, height: 0), cornerRadius: 1).cgPath
+        dashes.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 280, width: 420, height: 0), cornerRadius: 1).cgPath
         dashedMarker.layer.addSublayer(dashes)
         self.view.addSubview(dashedMarker)
         
         
+        let dashes2 = CAShapeLayer()
+        dashes2.strokeColor = UIColor.black.cgColor
+        dashes2.lineDashPattern = [7, 20]
+        dashes2.lineWidth = 2
+        dashes2.fillColor = nil
+        dashes2.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 280, width: 420, height: 0), cornerRadius: 1).cgPath
+        
+        var newView = UIView(frame: CGRect(x: 0, y: 360, width: 100, height: 100))
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 207, y: 200), radius:100, startAngle: .pi, endAngle: 0, clockwise: true)
+        let circleShape = CAShapeLayer()
+        circleShape.path = circlePath.cgPath
+        dashes2.path = circlePath.cgPath
+        newView.layer.addSublayer(dashes2)
+        self.view.addSubview(newView)
+        
+        self.view.bringSubviewToFront(potLabel)
         
         // Do any additional setup after loading the view.
     }
@@ -147,15 +163,20 @@ class GameViewController: UIViewController {
                 chip.removeGestureRecognizer((chip.gestureRecognizers?[0])!)
             }
             */
-            if let recognizers = chip.gestureRecognizers {
-                chip.removeGestureRecognizer(recognizers[0])
-
-            }
             
+            if let recognizers = chip.gestureRecognizers {
+                for recognizer in recognizers   {
+                    chip.removeGestureRecognizer(recognizer)
+                }
+            }
+ 
+
             currentPotSize += chipValues[chip.selfchipType]!
             self.view.addSubview(chip)
             currentPot.append(chip)
             moveChipToPot(chip: chip)
+
+
         }
 
         
