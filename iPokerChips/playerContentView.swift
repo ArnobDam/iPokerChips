@@ -37,6 +37,8 @@ class playerContentView: UIView {
     var chipValues:[Chip.chipType:Double] = [:]
     
     let formatter = NumberFormatter()
+    
+    var playerTitle:UILabel!
 
 
     var redChipArray1: [Chip] = []
@@ -73,6 +75,8 @@ class playerContentView: UIView {
 
     
     var player: String?
+    
+    var folded = false
     
     
     var highlightedView:UIView!
@@ -463,6 +467,10 @@ class playerContentView: UIView {
         
         
         currentHandSize! -= chipValues[chip.selfchipType]!
+        
+        if currentHandSize! <= Double(0.001) {
+            currentHandSize! = Double(0)
+        }
 
         
         formatter.minimumFractionDigits = 0
@@ -576,7 +584,6 @@ class playerContentView: UIView {
         raiseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         raiseButton.backgroundColor  = UIColor.black
         self.addSubview(raiseButton)
-        raiseButton.isHidden = true
         
         
         cancelButton = UIButton(frame: CGRect(x: 20, y: 400, width: 80, height: 30))
@@ -595,7 +602,7 @@ class playerContentView: UIView {
         
         
 
-        let playerTitle = UILabel(frame: CGRect(x: 136, y: -49, width: 150, height: 150
+        playerTitle = UILabel(frame: CGRect(x: 136, y: -49, width: 150, height: 150
         ))
         playerTitle.text = player
         playerTitle.font = UIFont (name: "Gurmukhi MN", size: 30)
@@ -666,8 +673,7 @@ class playerContentView: UIView {
         highlightedView.alpha = 0
         self.addSubview(highlightedView)
         
-        self.bringSubviewToFront(cancelButton)
-        self.bringSubviewToFront(raiseButton)
+
     }
     
     
@@ -675,14 +681,11 @@ class playerContentView: UIView {
         if cancelButton.isHidden {
             
             self.cancelButton.alpha = 0
-            self.raiseButton.alpha = 0
             self.cancelButton.isHidden = false
-            self.raiseButton.isHidden = false
             
             UIView.animate(withDuration: 0.5, animations: {
  
                 self.cancelButton.alpha = 1
-                self.raiseButton.alpha = 1
             })
         }
         
@@ -693,16 +696,13 @@ class playerContentView: UIView {
         if !cancelButton.isHidden {
             
             self.cancelButton.alpha = 1
-            self.raiseButton.alpha = 1
 
             
             UIView.animate(withDuration: 0.5, animations: {
                 
                 self.cancelButton.alpha = 0
-                self.raiseButton.alpha = 0
             },completion: { (finished: Bool) in
                 self.cancelButton.isHidden = true
-                self.raiseButton.isHidden = true
                 
             })
         
@@ -879,6 +879,8 @@ class playerContentView: UIView {
     }
     
     @objc func foldButtonPressed() {
+        
+        folded = true
         for chip in chipsToBid{
             addChipToStack(chip: chip)
         }
@@ -893,9 +895,9 @@ class playerContentView: UIView {
     
     @objc func raiseButtonPressed() {
         
-        for chip in chipsToBid {
-            currentHandSize! -= chipValues[chip.selfchipType]!
-        }
+
+        currentBidLabel.text = "$0"
+        currentBid = 0
         
         
         hideBidButtons()
