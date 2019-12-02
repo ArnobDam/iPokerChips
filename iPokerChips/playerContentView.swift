@@ -732,9 +732,15 @@ class playerContentView: UIView {
     }
     
     @objc func foldButtonPressed() {
-        
+        for chip in chipsToBid{
+            addChipToStack(chip: chip)
+        }
+        chipsToBid.removeAll()
         if let topController = UIApplication.topViewController() as? GameViewController {
-            topController.goToNextPlayer()
+            topController.addToPot(chips: self.chipsToBid)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                topController.goToNextPlayer()
+            }
         }
     }
     
