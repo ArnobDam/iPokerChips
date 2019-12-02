@@ -15,8 +15,12 @@ class GameViewController: UIViewController {
     var playerContentViews: [playerContentView] = []
     var currentPlayer = 0
     var currentPotSize:Double!
-    var currentBid: Double?
     var chipValues:[Chip.chipType:Double] = [:]
+    
+    var startingPlayer:Int = 0
+    var smallBlind:Int = 0
+    var bigBlind:Int = 0
+
 
     
     var currentPot:[Chip] = []
@@ -29,7 +33,6 @@ class GameViewController: UIViewController {
 
     
     @IBOutlet weak var potLabel: UILabel!
-    @IBOutlet weak var bidLabel: UILabel!
 
 
     @IBAction func popOutMenu(_ sender: Any) {
@@ -50,6 +53,21 @@ class GameViewController: UIViewController {
 
     }
     
+    func nextRound()  {
+        startingPlayer += 1
+        
+        contentScroll.isScrollEnabled = true
+        
+        currentPlayer += startingPlayer
+
+        
+        let frame = playerContentViews[startingPlayer-1].frame
+        contentScroll.scrollRectToVisible(frame, animated: true)
+        
+        contentScroll.isScrollEnabled = false
+        
+    }
+    
     
     func giveChipsFromPot () {
         
@@ -67,10 +85,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var contentScroll: UIScrollView!
     
-    func roundOver() {
-        currentBid = 0
-        bidLabel.text =  "Current Bid $" + formatter.string(from: currentBid! as NSNumber)!
-    }
+
 
     func goToNextPlayer() {
         contentScroll.isScrollEnabled = true
@@ -157,11 +172,10 @@ class GameViewController: UIViewController {
         newView.layer.addSublayer(dashes2)
         self.view.addSubview(newView)
         
-        currentBid = 0
-        bidLabel.text =  "Current Bid $" + formatter.string(from: currentBid! as NSNumber)!
+
         
         self.view.bringSubviewToFront(potLabel)
-        
+        startingPlayer = 1
         // Do any additional setup after loading the view.
     }
     
@@ -200,7 +214,7 @@ class GameViewController: UIViewController {
 
 
         UIView.animate(withDuration: 0.7, animations: {
-            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 105 ..< Int(UIScreen.main.bounds.width/2) + 45 )), y: CGFloat(Int.random(in: 50 ..< 250)), width: 40, height: 40)
+            chip.frame = CGRect(x: CGFloat(Int.random(in: Int(UIScreen.main.bounds.width/2) - 95 ..< Int(UIScreen.main.bounds.width/2) + 60 )), y: CGFloat(Int.random(in: 100 ..< 215)), width: 40, height: 40)
         }, completion: { (finished: Bool) in
             self.playerContentViews[self.currentPlayer].chipsToBid.removeAll()
         })

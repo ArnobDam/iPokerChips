@@ -456,7 +456,6 @@ class playerContentView: UIView {
         for chip in chips {
             currentHandSize! += chipValues[chip.selfchipType]!
         }
-        print(currentHandSize)
         for chip in chips{
             
             self.addSubview(chip)
@@ -464,6 +463,21 @@ class playerContentView: UIView {
             if chip.gestureRecognizers?.count == 0 {
                 addGestureRecognizerToChip(chip:chip)
             }
+        }
+        var shouldReshuffle = false
+        
+        if blueChipArray[2].count > 10 {shouldReshuffle = true}
+        if redChipArray[2].count > 10 {shouldReshuffle = true}
+        if greenChipArray[2].count > 10 {shouldReshuffle = true}
+        
+        
+        
+        if shouldReshuffle {
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            self.callButtonPressed()
+        }
         }
         
     }
@@ -733,6 +747,16 @@ class playerContentView: UIView {
         print(handSize)
         
         for (chipType,num) in chipNums {
+            if num == 0 {
+                
+            }
+            else if num == 1 {
+                let chip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: chipType)
+                addGestureRecognizerToChip(chip: chip)
+                self.addSubview(chip)
+                addChipToStack(chip: chip)
+            }
+            else {
             for i in 1...num {
                 let chip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: chipType)
                 addGestureRecognizerToChip(chip: chip)
@@ -740,7 +764,7 @@ class playerContentView: UIView {
                 addChipToStack(chip: chip)
             }
         }
-        
+        }
         
         
     }

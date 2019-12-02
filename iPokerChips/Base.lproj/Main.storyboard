@@ -274,18 +274,11 @@
                                 <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="21"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyc-9i-tao">
-                                <rect key="frame" x="90" y="282" width="234" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="21"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75191285490000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="JvD-Dq-kJI"/>
                     </view>
                     <connections>
-                        <outlet property="bidLabel" destination="Yyc-9i-tao" id="FDe-JF-beu"/>
                         <outlet property="contentScroll" destination="0bX-DG-SVb" id="S7P-Jv-fba"/>
                         <outlet property="potLabel" destination="AC4-dQ-Oqe" id="GK5-H7-xdV"/>
                     </connections>
