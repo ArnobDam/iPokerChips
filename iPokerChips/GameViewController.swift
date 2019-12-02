@@ -46,12 +46,22 @@ class GameViewController: UIViewController {
         
       //  giveChipsFromPot()
 
-        nextRound()
+        
+        let popupView = PopUpViewController()
+        popupView.choices = playerNames
+        self.navigationController?.pushViewController(popupView, animated: true)
 
 
     }
     
     func nextRound()  {
+        
+        for player in 0...playerNames.count - 1 {
+            playerContentViews[player].folded = false
+        }
+        
+        
+        
         startingPlayer += 1
         
         
@@ -67,7 +77,7 @@ class GameViewController: UIViewController {
         currentPlayer = startingPlayer
 
         
-        let frame = playerContentViews[currentPlayer].frame
+        let frame = playerContentViews[startingPlayer].frame
         contentScroll.scrollRectToVisible(frame, animated: true)
         
         contentScroll.isScrollEnabled = false
@@ -75,16 +85,16 @@ class GameViewController: UIViewController {
     }
     
     
-    func giveChipsFromPot () {
+    func giveChipsFromPot (to:Int) {
         
         potLabel.text = ""
-        playerContentViews[currentPlayer].addChipsFromPot(chips: currentPot)
+        playerContentViews[to].addChipsFromPot(chips: currentPot)
         currentPot.removeAll()
         currentPotSize = 0
         
         
         potLabel.text = "Pot $" + formatter.string(from: currentPotSize as NSNumber)!
-
+        nextRound()
         
     }
 
@@ -96,12 +106,25 @@ class GameViewController: UIViewController {
     func goToNextPlayer() {
         contentScroll.isScrollEnabled = true
 
+        var foldedPlayers = 0
+        
         currentPlayer += 1
         if currentPlayer == playerNames.count {
             currentPlayer = 0
         }
         
         while playerContentViews[currentPlayer].folded || (playerContentViews[currentPlayer].currentHandSize == 0) {
+            foldedPlayers += 1
+            
+            if foldedPlayers == playerNames.count{
+                print("all folded")
+                let popupView = PopUpViewController()
+                popupView.choices = playerNames
+                self.navigationController?.pushViewController(popupView, animated: true)
+                break
+                
+                
+            }
 
             if currentPlayer == playerNames.count-1 {
                 currentPlayer = 0
@@ -119,6 +142,11 @@ class GameViewController: UIViewController {
 
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +155,6 @@ class GameViewController: UIViewController {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         self.view.backgroundColor = UIColor(patternImage: image)
-        self.navigationController?.navigationBar.isHidden = true
         
         contentScroll.contentSize = CGSize(width: contentScroll.frame.size.width*CGFloat(playerNames.count), height: contentScroll.frame.size.height)
         contentScroll.contentSize.height = 1

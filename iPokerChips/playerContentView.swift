@@ -533,7 +533,7 @@ class playerContentView: UIView {
         
         callButton =   UIButton(frame: CGRect(x:30, y: 525, width: 100, height: 50))
         
-        callButton.setTitle("Reset Chips", for: .normal)
+        callButton.setTitle("Reshuffle", for: .normal)
         callButton.titleLabel!.font = UIFont (name: "Gurmukhi MN", size: 20)
         callButton.addTarget(self, action: #selector(callButtonPressed), for: .touchUpInside)
         callButton.layer.cornerRadius = 5
