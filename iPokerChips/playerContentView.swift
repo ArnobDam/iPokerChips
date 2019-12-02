@@ -31,7 +31,11 @@ class playerContentView: UIView {
     
     var handSize: Double?
     var currentHandSize: Double?
+    var currentBid: Double = 0.0
+    var currentBidLabel: UILabel!
     var chipValues:[Chip.chipType:Double] = [:]
+    
+    let formatter = NumberFormatter()
 
 
     var redChipArray1: [Chip] = []
@@ -125,9 +129,7 @@ class playerContentView: UIView {
                 removeChipFromStack(chip:chip)
                 chipsToBid.append(chip)
                 showBidButtons()
-                if let topController = UIApplication.topViewController() as? GameViewController {
-                    topController.addToPot(chips: self.chipsToBid)
-                }
+
                
             }
             else {
@@ -367,6 +369,8 @@ class playerContentView: UIView {
     
     func moveChipTo (chip:Chip, frame: CGRect) {
         
+        
+        
         UIView.animate(withDuration: 0.7, animations: {
             chip.frame = frame
         })
@@ -442,6 +446,12 @@ class playerContentView: UIView {
 
     
     func moveChipToPot(chip:Chip) {
+        
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        
+        currentBid += chipValues[chip.selfchipType]!
+        currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
         
         UIView.animate(withDuration: 0.7, animations: {
             
@@ -565,6 +575,14 @@ class playerContentView: UIView {
         dragToRaise.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(dragToRaise)
         
+        currentBidLabel = UILabel(frame: CGRect(x: 180, y: 350, width: 150, height: 100))
+        currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
+        currentBidLabel.font = UIFont(name: "Gurmukhi MN", size: 18)
+        currentBidLabel.textColor = UIColor.black
+        currentBidLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        self.addSubview(currentBidLabel)
+        
+        
         redChipArray = [redChipArray1, redChipArray2, redChipArray3]
         blueChipArray = [blueChipArray1, blueChipArray2, blueChipArray3]
         greenChipArray = [greenChipArray1, greenChipArray2, greenChipArray3]
@@ -613,6 +631,8 @@ class playerContentView: UIView {
         highlightedView.alpha = 0
         self.addSubview(highlightedView)
         
+        self.bringSubviewToFront(cancelButton)
+        self.bringSubviewToFront(raiseButton)
     }
     
     
@@ -846,8 +866,10 @@ class playerContentView: UIView {
     
     @objc func cancelPressed() {
         hideBidButtons()
-
         
+        currentBid  = 0.0
+        currentBidLabel.text = "$" + formatter.string(from: currentBid as NSNumber)!
+    
         for chip in chipsToBid{
             addChipToStack(chip: chip)
         }

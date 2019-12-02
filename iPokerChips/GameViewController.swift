@@ -26,7 +26,6 @@ class GameViewController: UIViewController {
     
     let formatter = NumberFormatter()
 
-//commit
     
     @IBOutlet weak var potLabel: UILabel!
     @IBOutlet weak var bidLabel: UILabel!
@@ -194,7 +193,6 @@ class GameViewController: UIViewController {
  
 
             currentPotSize += chipValues[chip.selfchipType]!
-            currentBid += chipValues[chip.selfchipType] ?? 0.0
             self.view.addSubview(chip)
             currentPot.append(chip)
             moveChipToPot(chip: chip)
