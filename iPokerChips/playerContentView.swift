@@ -105,6 +105,7 @@ class playerContentView: UIView {
         if (recognizer.state == UIGestureRecognizer.State.began) {
             highlightView()
             shouldHighlight = true
+            self.bringSubviewToFront(chip)
             
         }
         
