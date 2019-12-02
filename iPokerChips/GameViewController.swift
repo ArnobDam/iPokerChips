@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
     
     let formatter = NumberFormatter()
 
-
+//commit
     
     @IBOutlet weak var potLabel: UILabel!
     @IBOutlet weak var bidLabel: UILabel!
