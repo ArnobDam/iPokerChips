@@ -621,6 +621,27 @@ class playerContentView: UIView {
         }
         
     }
+    
+    
+    func hideBidButtons()  {
+        if !cancelButton.isHidden {
+            
+            self.cancelButton.alpha = 1
+            self.raiseButton.alpha = 1
+
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                
+                self.cancelButton.alpha = 0
+                self.raiseButton.alpha = 0
+            },completion: { (finished: Bool) in
+                self.cancelButton.isHidden = true
+                self.raiseButton.isHidden = true
+                
+            })
+        
+    }
+    }
 
     func highlightView() {
         UIView.animate(withDuration: 0.5, animations: {
@@ -719,15 +740,21 @@ class playerContentView: UIView {
     
     @objc func raiseButtonPressed() {
         
+        hideBidButtons()
         
-        if let topController = UIApplication.topViewController() as? GameViewController {
-            topController.addToPot(chips: chipsToBid)
+            if let topController = UIApplication.topViewController() as? GameViewController {
+                
+                topController.addToPot(chips: self.chipsToBid)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    topController.goToNextPlayer()
+                }
         }
+
     }
     
     @objc func cancelPressed() {
-        print(" cancel pressed")
-        
+        hideBidButtons()
+
         
         for chip in chipsToBid{
             addChipToStack(chip: chip)

@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     var playerContentViews: [playerContentView] = []
     var currentPlayer = 0
     var currentPotSize:Double!
-    
+    var currentBid: Double?
     var chipValues:[Chip.chipType:Double] = [:]
 
     
@@ -29,6 +29,8 @@ class GameViewController: UIViewController {
 
     
     @IBOutlet weak var potLabel: UILabel!
+    @IBOutlet weak var bidLabel: UILabel!
+
 
     @IBAction func popOutMenu(_ sender: Any) {
         //goToNextPlayer()
@@ -64,6 +66,11 @@ class GameViewController: UIViewController {
 
     
     @IBOutlet weak var contentScroll: UIScrollView!
+    
+    func roundOver() {
+        currentBid = 0
+        bidLabel.text =  "Current Bid $" + formatter.string(from: currentBid! as NSNumber)!
+    }
 
     func goToNextPlayer() {
         contentScroll.isScrollEnabled = true
@@ -149,6 +156,9 @@ class GameViewController: UIViewController {
         dashes2.path = circlePath.cgPath
         newView.layer.addSublayer(dashes2)
         self.view.addSubview(newView)
+        
+        currentBid = 0
+        bidLabel.text =  "Current Bid $" + formatter.string(from: currentBid! as NSNumber)!
         
         self.view.bringSubviewToFront(potLabel)
         
