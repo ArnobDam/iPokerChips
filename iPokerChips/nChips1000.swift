@@ -15,10 +15,10 @@ func numberOfChips1000 (currentDollarHandSize:Double) -> [Chip.chipType:Int] {
     var nGreenChips: Double!
     var nBlackChips: Double!
     
-    let n1: Double = 400.00
-    let n2: Double = 300.00
-    let n3: Double = 200.00
-    let n4: Double = 100.00
+    let n1: Double = 100.00
+    let n2: Double = 200.00
+    let n3: Double = 300.00
+    let n4: Double = 400.00
     
     var newHS: Double!
     

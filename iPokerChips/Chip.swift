@@ -25,7 +25,6 @@ public class Chip: UIImageView {
         case black = "BlackChip"
 
     }
-    
 
     
     init(frame: CGRect, chipType:chipType) {

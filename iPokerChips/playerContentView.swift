@@ -671,7 +671,7 @@ class playerContentView: UIView {
             }
         })
     }
-    
+
     @objc func callButtonPressed() {
         for i in 0...blueChipArray.count - 1 {
             
