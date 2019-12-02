@@ -46,7 +46,10 @@ class GameViewController: UIViewController {
          
         
         
-        giveChipsFromPot()
+//        giveChipsFromPot()
+        
+        let popUpVC = PopUpViewController()
+        self.navigationController?.pushViewController(popUpVC, animated: true)
 
         
 

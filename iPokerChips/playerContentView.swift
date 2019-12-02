@@ -33,6 +33,7 @@ class playerContentView: UIView {
     var currentHandSize: Double?
     var currentBid: Double = 0.0
     var currentBidLabel: UILabel!
+    
     var chipValues:[Chip.chipType:Double] = [:]
     
     let formatter = NumberFormatter()
@@ -521,6 +522,7 @@ class playerContentView: UIView {
     
     
     func displayView(){
+        
         callButton =   UIButton(frame: CGRect(x:30, y: 525, width: 100, height: 50))
         
         callButton.setTitle("Reset Chips", for: .normal)
@@ -590,6 +592,8 @@ class playerContentView: UIView {
         cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.addSubview(cancelButton)
         cancelButton.isHidden = true
+        
+        
 
         let playerTitle = UILabel(frame: CGRect(x: 136, y: -49, width: 150, height: 150
         ))
@@ -808,6 +812,7 @@ class playerContentView: UIView {
         
         
     }
+    
 
     @objc func allInButtonPressed() {
         print("call pressed ")
