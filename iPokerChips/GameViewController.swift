@@ -18,9 +18,7 @@ class GameViewController: UIViewController {
     var currentBid: Double!
     var chipValues:[Chip.chipType:Double] = [:]
     
-    var startingPlayer:Int = 0
-    var smallBlind:Int = 0
-    var bigBlind:Int = 0
+    var startingPlayer:Int = -1
 
 
     
@@ -46,21 +44,30 @@ class GameViewController: UIViewController {
          
         
         
-        giveChipsFromPot()
+      //  giveChipsFromPot()
 
-        
+        nextRound()
+
 
     }
     
     func nextRound()  {
         startingPlayer += 1
         
+        
+        if startingPlayer == playerNames.count {
+            startingPlayer = 0
+        }
+        
+        
+        
+        
         contentScroll.isScrollEnabled = true
         
-        currentPlayer += startingPlayer
+        currentPlayer = startingPlayer
 
         
-        let frame = playerContentViews[startingPlayer-1].frame
+        let frame = playerContentViews[currentPlayer].frame
         contentScroll.scrollRectToVisible(frame, animated: true)
         
         contentScroll.isScrollEnabled = false
@@ -93,7 +100,9 @@ class GameViewController: UIViewController {
         if currentPlayer == playerNames.count {
             currentPlayer = 0
         }
-        while playerContentViews[currentPlayer].folded {
+        
+        while playerContentViews[currentPlayer].folded || (playerContentViews[currentPlayer].currentHandSize == 0) {
+
             if currentPlayer == playerNames.count-1 {
                 currentPlayer = 0
             }
@@ -101,7 +110,6 @@ class GameViewController: UIViewController {
             currentPlayer += 1
             }
         }
-        //commit
 
         
         let frame = playerContentViews[currentPlayer].frame
@@ -183,10 +191,10 @@ class GameViewController: UIViewController {
         newView.layer.addSublayer(dashes2)
         self.view.addSubview(newView)
         
-
+        
         
         self.view.bringSubviewToFront(potLabel)
-        startingPlayer = 1
+        nextRound()
         // Do any additional setup after loading the view.
     }
     
