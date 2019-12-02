@@ -27,6 +27,10 @@ extension UIApplication {
 
 
 class playerContentView: UIView {
+    
+    
+    var handSize: Double?
+
     var redChipArray1: [Chip] = []
     var redChipArray2: [Chip] = []
     var redChipArray3: [Chip] = []
@@ -78,9 +82,10 @@ class playerContentView: UIView {
     
     
     
-     init(frame: CGRect, name: String) {
+    init(frame: CGRect, name: String, startingHandsize:Double) {
         super.init(frame: frame)
         player = name
+        handSize = startingHandsize
         displayView()
        // addRecognizerToChip()
     }
@@ -256,7 +261,7 @@ class playerContentView: UIView {
             
             if blackChipArray[0].count < 10 {
                 blackChipArray[0].append(chip)
-                xPos =  220
+                xPos =  320
                 yPos = 780 - blackChipArray[0].count*20
                 
                 
@@ -268,7 +273,7 @@ class playerContentView: UIView {
             }
             else if blackChipArray[1].count < 10 {
                 blackChipArray[1].append(chip)
-                xPos = 250
+                xPos = 350
                 yPos = 780 - blackChipArray[1].count*20
                 
                 if blackChipArray[1].count > 1{
@@ -281,7 +286,7 @@ class playerContentView: UIView {
                 
                 blackChipArray[2].append(chip)
                 
-                xPos = 190
+                xPos = 290
                 yPos = 780 - blackChipArray[2].count*20
                 
                 if blackChipArray[2].count > 1{
@@ -306,7 +311,7 @@ class playerContentView: UIView {
             
             if greenChipArray[0].count < 10 {
                 greenChipArray[0].append(chip)
-                xPos =  320
+                xPos =  220
                 yPos = 780 - greenChipArray[0].count*20
                 
                 
@@ -318,7 +323,7 @@ class playerContentView: UIView {
             }
             else if greenChipArray[1].count < 10 {
                 greenChipArray[1].append(chip)
-                xPos = 350
+                xPos = 250
                 yPos = 780 - greenChipArray[1].count*20
 
                 if greenChipArray[1].count > 1{
@@ -331,7 +336,7 @@ class playerContentView: UIView {
                 
                 greenChipArray[2].append(chip)
                 
-                xPos = 290
+                xPos = 190
                 yPos = 780 - greenChipArray[2].count*20
                 
                 if greenChipArray[2].count > 1{
@@ -553,31 +558,41 @@ class playerContentView: UIView {
         blueChipArray = [blueChipArray1, blueChipArray2, blueChipArray3]
         greenChipArray = [greenChipArray1, greenChipArray2, greenChipArray3]
         blackChipArray = [blackChipArray1, blackChipArray2, blackChipArray3]
-
         
-        for i in 1...15 {
-            let blueChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .blue)
-            addGestureRecognizerToChip(chip: blueChip)
-            self.addSubview(blueChip)
-            addChipToStack(chip: blueChip)
-            
-            let blackChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .black)
-            addGestureRecognizerToChip(chip: blackChip)
-            self.addSubview(blackChip)
-            addChipToStack(chip: blackChip)
-            
-            
-            let greenChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .green)
-            addGestureRecognizerToChip(chip: greenChip)
-            self.addSubview(greenChip)
-            addChipToStack(chip: greenChip)
-            
-            
-            let redChip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: .red)
-            addGestureRecognizerToChip(chip: redChip)
-            self.addSubview(redChip)
-            addChipToStack(chip: redChip)
+        var chipNums:[Chip.chipType:Int]  = [:]
+        if handSize == Double(10) {
+            print("its 10")
+            chipNums = numberOfChips10(currentDollarHandSize: handSize!)
         }
+        else if handSize == 50 {
+            chipNums = numberOfChips50(currentDollarHandSize: handSize!)
+
+        }
+        else if handSize == 100 {
+            chipNums = numberOfChips100(currentDollarHandSize: handSize!)
+
+        }
+        else if handSize == 500 {
+            chipNums = numberOfChips500(currentDollarHandSize: handSize!)
+
+        }
+        else if handSize == 1000 {
+            chipNums = numberOfChips1000(currentDollarHandSize: handSize!)
+
+        }
+        print(handSize)
+        
+        for (chipType,num) in chipNums {
+            for i in 1...num {
+                let chip = Chip(frame: CGRect(x: 214, y: 700, width: chipHeight, height: chipHeight), chipType: chipType)
+                addGestureRecognizerToChip(chip: chip)
+                self.addSubview(chip)
+                addChipToStack(chip: chip)
+            }
+        }
+        
+        
+
         
         
         

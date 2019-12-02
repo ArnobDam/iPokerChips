@@ -95,10 +95,12 @@ class GameViewController: UIViewController {
         
         contentScroll.isScrollEnabled = false
 
+        print("the handsize is \(handSize)")
         
         var currentWidth:CGFloat = 0
         for name in playerNames {
-            let playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name)
+            let playerContent = playerContentView(frame: CGRect(x: currentWidth, y:0 , width: self.view.frame.width, height: self.view.frame.height), name: name, startingHandsize:handSize!)
+
             playerContentViews.append(playerContent)
             contentScroll.addSubview(playerContent)
             currentWidth += self.view.frame.width
